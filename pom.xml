@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.onap.oparent</groupId>
+    <artifactId>oparent</artifactId>
+    <version>3.2.0</version>
+    <relativePath/>
+  </parent>
+  <groupId>org.onap.sdc</groupId>
+  <artifactId>sdc-helm-validator</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>helmvalidator</name>
+  <description>Spring-Boot application for validating helm charts</description>
+
+  <properties>
+    <java.version>11</java.version>
+
+    <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+		<skipDockerPush>true</skipDockerPush>
+
+		<docker-maven-plugin.version>0.34.1</docker-maven-plugin.version>
+		<spring.version>2.4.3</spring.version>
+		<apache.commons.compress.version>1.20</apache.commons.compress.version>
+
+    <docker.dockerfile>Dockerfile</docker.dockerfile>
+    <docker-image.name>onap/${project.groupId}.${project.artifactId}</docker-image.name>
+    <docker-image.registry>${onap.nexus.dockerregistry.daily}</docker-image.registry>
+    <docker-image.tag.latest>latest</docker-image.tag.latest>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-compress</artifactId>
+      <version>${apache.commons.compress.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>${docker-maven-plugin.version}</version>
+        <configuration>
+          <skipPush>${skipDockerPush}</skipPush>
+          <verbose>true</verbose>
+          <imagePullPolicy>IfNotPresent</imagePullPolicy>
+          <images>
+            <image>
+              <alias>${project.artifactId}</alias>
+              <name>${docker-image.name}:${docker-image.tag.latest}</name>
+              <registry>${docker-image.registry}</registry>
+              <build>
+                <dockerFile>${docker.dockerfile}</dockerFile>
+                <contextDir>${project.basedir}</contextDir>
+                <tags>
+                  <tag>${project.version}-${maven.build.timestamp}Z</tag>
+                </tags>
+              </build>
+            </image>
+          </images>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+<!--DEV-->
+    <profile>
+      <id>dev</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-devtools</artifactId>
+          <optional>true</optional>
+        </dependency>
+      </dependencies>
+    </profile>
+
+<!--DOCKER-->
+    <profile>
+      <id>docker</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>docker-build-image</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>docker-local</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <docker.dockerfile>Dockerfile-local</docker.dockerfile>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>docker-build-image</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
