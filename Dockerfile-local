@@ -1,0 +1,21 @@
+FROM nexus3.onap.org:10001/onap/integration-java11:8.0.0
+
+ARG VERSION=${version}
+ENV HELM_SUPPORTED_VERSIONS=${HELM_SUPPORTED_VERSIONS}
+
+USER root
+RUN adduser -G onap -D validator
+
+RUN apk add --no-cache bash vim curl wget
+
+#Installing Helm
+COPY scripts/helm_versions/* /usr/local/bin/
+
+RUN mkdir /charts
+RUN chown -R validator:onap /charts
+
+USER validator:onap
+
+COPY target/sdc-helm-validator-${VERSION}.jar ./opt/helmvalidator/helmvalidator.jar
+
+ENTRYPOINT ["java","-XX:+UseParallelGC","-XX:MinRAMPercentage=50","-XX:MaxRAMPercentage=50","-XX:MinHeapFreeRatio=10","-XX:MaxHeapFreeRatio=20","-jar","./opt/helmvalidator/helmvalidator.jar"]
