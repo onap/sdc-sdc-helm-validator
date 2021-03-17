@@ -1,0 +1,8 @@
+Code-Review+2: LF Jenkins CI <releng+lf-jobbuilder@linuxfoundation.org>
+Code-Review+2: Tomasz Wr�bel <tomasz.wrobel@nokia.com>
+Verified+1: LF Jenkins CI <releng+lf-jobbuilder@linuxfoundation.org>
+Submitted-by: Tomasz Wr�bel <tomasz.wrobel@nokia.com>
+Submitted-at: Wed, 17 Mar 2021 07:35:34 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/sdc/sdc-helm-validator/+/119030
+Project: sdc/sdc-helm-validator
+Branch: refs/heads/master
