@@ -194,4 +194,32 @@ class ValidationControllerTest {
             .contains(VERSION_USED);
         assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
     }
+
+    @Test
+    void shouldContainsExceptionMessageInResponse() throws Exception {
+        MockMultipartFile file = new MockMultipartFile(FILE_KEY, SAMPLE_ORIGINAL_FILENAME,
+            MediaType.MULTIPART_FORM_DATA_VALUE, "test".getBytes());
+        NotSupportedVersionException exception = new NotSupportedVersionException("test");
+
+        when(validationService.process(SAMPLE_VERSION, file, false, false))
+            .thenThrow(exception);
+
+        MvcResult mvcResult = mockMvc.perform(
+            multipart(VALIDATION_ENDPOINT)
+                .file(file)
+                .param(VERSION_PARAM, SAMPLE_VERSION)
+                .param(IS_LINTED_PARAM, "false")
+                .param(IS_STRICT_LINTED_PARAM, "false"))
+            .andReturn();
+        String contentAsString = mvcResult.getResponse().getContentAsString();
+
+        assertThat(contentAsString)
+            .contains(exception.getMessage())
+            .doesNotContain(VALID)
+            .doesNotContain(RENDER_ERRORS)
+            .doesNotContain(LINT_WARNING)
+            .doesNotContain(LINT_ERROR);
+        assertThat(mvcResult.getResponse().getStatus()).isNotEqualTo(HttpStatus.OK.value());
+    }
+
 }
