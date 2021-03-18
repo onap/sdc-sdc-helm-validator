@@ -41,15 +41,18 @@ public class BashExecutor {
     BashOutput execute(String helmCommand) {
 
         try {
-            ProcessBuilder pb = new ProcessBuilder("bash", "-c", helmCommand);
+            ProcessBuilder pb = new ProcessBuilder("/bin/bash", "-c", helmCommand);
             pb.redirectErrorStream(true);
             LOGGER.debug("Start process");
             Process process = pb.start();
 
             List<String> processOutput = readOutputAndCloseProcess(process);
             return new BashOutput(process.exitValue(), processOutput);
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             throw new BashExecutionException("Error during bash execution: ", e);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new BashExecutionException("Bash execution interrupted, error: ", e);
         }
     }
 
