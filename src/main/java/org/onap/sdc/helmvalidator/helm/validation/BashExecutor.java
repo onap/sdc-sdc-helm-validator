@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 public class BashExecutor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(
-        ValidationService.class);
+        BashExecutor.class);
 
     BashOutput execute(String helmCommand) {
 

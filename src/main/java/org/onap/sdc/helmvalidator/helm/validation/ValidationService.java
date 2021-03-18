@@ -155,7 +155,7 @@ public class ValidationService {
 
         LOGGER.debug("Command executions: {} ", helmCommand);
         BashOutput chartTemplateResult = executor.execute(helmCommand);
-        LOGGER.debug("Status code: " + chartTemplateResult.getExitValue());
+        LOGGER.debug("Status code: {}", chartTemplateResult.getExitValue());
         if (chartTemplateResult.getExitValue() != 0) {
             List<String> renderingErrors = parseTemplateError(chartTemplateResult.getOutputLines());
             return new TemplateValidationResult(false, renderingErrors);

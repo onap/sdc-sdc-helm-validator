@@ -68,9 +68,9 @@ class ApiVersionsReaderTest {
     @Test
     void shouldThrowExceptionWhenApiVersionIsNotProvided() throws IOException {
         prepareTestTar(null);
-
+        final String chartPath = TEST_TAR_PATH.toString();
         Exception exception = assertThrows(ApiVersionNotFoundException.class,
-            () -> apiVersionsReader.readVersion(TEST_TAR_PATH.toString()));
+            () -> apiVersionsReader.readVersion(chartPath));
 
         assertThat(exception).hasMessageContaining("Cannot find apiVersion value in a main chart");
     }

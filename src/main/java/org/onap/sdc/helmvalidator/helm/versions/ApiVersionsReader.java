@@ -61,7 +61,7 @@ public class ApiVersionsReader {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(tarInput));
                 return bufferedReader.lines()
                     .filter(chartLine -> chartLine.contains(API_VERSION_PREFIX))
-                    .map(apiVersionLine -> apiVersionLine.replaceAll(API_VERSION_PREFIX, ""))
+                    .map(apiVersionLine -> apiVersionLine.replace(API_VERSION_PREFIX, ""))
                     .map(String::trim)
                     .findFirst();
             }
