@@ -99,16 +99,6 @@ public class ValidationService {
     }
 
     private String getSupportedHelmVersion(String desiredVersion, String chartPath) {
-        String helmVersion = getHelmVersion(desiredVersion, chartPath);
-
-        if (isNotSupportedVersion(helmVersion)) {
-            throw new NotSupportedVersionException(helmVersion);
-        }
-
-        return helmVersion;
-    }
-
-    private String getHelmVersion(String desiredVersion, String chartPath) {
         if (desiredVersion == null) {
             return chartBasedVersionProvider.getVersion(chartPath);
         }
@@ -118,7 +108,11 @@ public class ValidationService {
             return supportedVersionsProvider.getLatestVersion(helmMajorVersion);
         }
 
-        return desiredVersion;
+        return supportedVersionsProvider.getVersions()
+            .stream()
+            .filter(s -> s.equals(desiredVersion))
+            .findFirst()
+            .orElseThrow(() -> new NotSupportedVersionException(desiredVersion));
     }
 
     private ValidationResult validateChart(String version, MultipartFile file, boolean isLinted, boolean isStrictLinted,
@@ -139,10 +133,6 @@ public class ValidationService {
         }
 
         return new ValidationResult(templateValidationResult, version);
-    }
-
-    private boolean isNotSupportedVersion(String version) {
-        return !supportedVersionsProvider.getVersions().contains(version);
     }
 
 

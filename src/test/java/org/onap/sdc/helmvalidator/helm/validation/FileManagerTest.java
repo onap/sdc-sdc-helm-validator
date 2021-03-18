@@ -21,6 +21,7 @@
 package org.onap.sdc.helmvalidator.helm.validation;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
@@ -37,6 +38,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.onap.sdc.helmvalidator.helm.validation.exception.SaveFileException;
 import org.springframework.web.multipart.MultipartFile;
 
 @ExtendWith(MockitoExtension.class)
@@ -91,6 +93,23 @@ class FileManagerTest {
         fileManager.removeFile(filePath);
 
         assertThat(Files.exists(Paths.get(filePath))).isFalse();
+    }
+
+    @Test
+    void shouldThrowExceptionWhenFileContainsSlash() {
+        when(multipartFile.getOriginalFilename()).thenReturn(SAMPLE_FILE_NAME + "/");
+        Exception exception = assertThrows(SaveFileException.class,
+            () -> fileManager.saveFile(multipartFile));
+        assertThat(exception).hasMessageContaining("Not allowed file name");
+    }
+
+    @Test
+    void shouldThrowExceptionWhenFileNameIsNull() {
+        when(multipartFile.getOriginalFilename()).thenReturn(null);
+
+        Exception exception = assertThrows(SaveFileException.class,
+            () -> fileManager.saveFile(multipartFile));
+        assertThat(exception).hasMessageContaining("Not allowed file name");
     }
 
     private void mockMultipartFile() throws IOException {

@@ -47,6 +47,7 @@ public class FileManager {
 
     String saveFile(MultipartFile file) {
         LOGGER.debug("Base PATH: {}", basePath);
+
         try {
             String filePath = basePath + File.separator + generateFileName(file.getOriginalFilename());
             LOGGER.info("Attempt to save file : {}", filePath);
@@ -67,6 +68,16 @@ public class FileManager {
     }
 
     private String generateFileName(String fileName) {
-        return Instant.now().toEpochMilli() + "_" + fileName;
+        if (isValidFileName(fileName)) {
+            return Instant.now().toEpochMilli() + "_" + fileName.replaceAll("\\s+", "");
+        }
+        throw new SaveFileException("Not allowed file name");
+    }
+
+    private boolean isValidFileName(String fileName) {
+        if (fileName == null){
+            return false;
+        }
+        return !fileName.contains("/");
     }
 }
