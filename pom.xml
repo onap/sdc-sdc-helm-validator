@@ -18,7 +18,6 @@
     <java.version>11</java.version>
 
     <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
-		<skipDockerPush>true</skipDockerPush>
 
 		<docker-maven-plugin.version>0.34.1</docker-maven-plugin.version>
 		<spring.version>2.4.3</spring.version>
@@ -86,7 +85,6 @@
         <artifactId>docker-maven-plugin</artifactId>
         <version>${docker-maven-plugin.version}</version>
         <configuration>
-          <skipPush>${skipDockerPush}</skipPush>
           <verbose>true</verbose>
           <imagePullPolicy>IfNotPresent</imagePullPolicy>
           <images>
