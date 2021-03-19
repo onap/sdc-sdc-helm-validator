@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0005117e_904607f5",
+        "filename": "src/test/java/org/onap/sdc/helmvalidator/api/ValidationControllerTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-19T08:00:47Z",
+      "side": 1,
+      "message": "Please move it up - for grouping \"does not contains\" together.",
+      "range": {
+        "startLine": 218,
+        "startChar": 12,
+        "endLine": 218,
+        "endChar": 45
+      },
+      "revId": "ddf7fec83588f103d1343213508c6eb5a6090290",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
