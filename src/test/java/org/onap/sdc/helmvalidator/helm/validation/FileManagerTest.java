@@ -45,7 +45,6 @@ class FileManagerTest {
     private static final String TEST_RESOURCES_TMP = "src/test/resources/tmp";
     private static final File TEST_RESOURCES_DIR = new File(TEST_RESOURCES_TMP);
     private static final ByteArrayInputStream TEST_INPUT_STREAM = new ByteArrayInputStream("test".getBytes());
-    private static final String SAMPLE_FILE_NAME = "sample_file";
 
     private FileManager fileManager;
 
@@ -69,11 +68,11 @@ class FileManagerTest {
 
     @BeforeEach
     void setUp() {
-        fileManager = new FileManager(TEST_RESOURCES_TMP);
+        fileManager = new FileManager(TEST_RESOURCES_DIR.getAbsolutePath());
     }
 
     @Test
-    void saveMultipartFileAndReturnFilePath() throws IOException {
+    void saveMultipartFileAndReturnFilePath() throws IOException, InterruptedException {
         mockMultipartFile();
 
         String filePath = fileManager.saveFile(multipartFile);
@@ -94,7 +93,6 @@ class FileManagerTest {
     }
 
     private void mockMultipartFile() throws IOException {
-        when(multipartFile.getOriginalFilename()).thenReturn(SAMPLE_FILE_NAME);
         when(multipartFile.getInputStream()).thenReturn(TEST_INPUT_STREAM);
     }
 }

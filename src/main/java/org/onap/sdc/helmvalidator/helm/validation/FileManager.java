@@ -20,12 +20,11 @@
 
 package org.onap.sdc.helmvalidator.helm.validation;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.time.Instant;
 import org.onap.sdc.helmvalidator.helm.validation.exception.SaveFileException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,10 +47,10 @@ public class FileManager {
     String saveFile(MultipartFile file) {
         LOGGER.debug("Base PATH: {}", basePath);
         try {
-            String filePath = basePath + File.separator + generateFileName(file.getOriginalFilename());
-            LOGGER.info("Attempt to save file : {}", filePath);
-            Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
-            return filePath;
+            final Path tmpFilePath = Files.createTempFile(Paths.get(basePath), "chart-", ".tgz");
+            LOGGER.info("Attempt to save file : {}", tmpFilePath);
+            Files.copy(file.getInputStream(), tmpFilePath, StandardCopyOption.REPLACE_EXISTING);
+            return tmpFilePath.toString();
         } catch (IOException e) {
             throw new SaveFileException("Cannot save file: " + file.getOriginalFilename(), e);
         }
@@ -64,9 +63,5 @@ public class FileManager {
         } catch (IOException e) {
             LOGGER.warn("Cannot delete file: {}, Exception: {}", path, e.getStackTrace());
         }
-    }
-
-    private String generateFileName(String fileName) {
-        return Instant.now().toEpochMilli() + "_" + fileName;
     }
 }
