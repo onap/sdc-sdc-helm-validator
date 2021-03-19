@@ -4,7 +4,7 @@ target/
 !**/src/test/**/target/
 /scripts/helm_tmp/*
 /scripts/helm_versions/*
-
+/src/test/resources/tmp
 
 ### IntelliJ IDEA ###
 .idea
