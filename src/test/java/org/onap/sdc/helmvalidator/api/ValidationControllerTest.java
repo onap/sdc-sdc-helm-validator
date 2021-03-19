@@ -156,12 +156,13 @@ class ValidationControllerTest {
             .andReturn();
         String contentAsString = mvcResult.getResponse().getContentAsString();
 
-        assertThat(contentAsString).contains(VALID);
-        assertThat(contentAsString).contains(DEPLOYABLE);
-        assertThat(contentAsString).contains(RENDER_ERRORS);
-        assertThat(contentAsString).contains(LINT_WARNING);
-        assertThat(contentAsString).contains(LINT_ERROR);
-        assertThat(contentAsString).contains(VERSION_USED);
+        assertThat(contentAsString)
+            .contains(VALID)
+            .contains(DEPLOYABLE)
+            .contains(RENDER_ERRORS)
+            .contains(LINT_WARNING)
+            .contains(LINT_ERROR)
+            .contains(VERSION_USED);
         assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 
@@ -184,12 +185,13 @@ class ValidationControllerTest {
             .andReturn();
         String contentAsString = mvcResult.getResponse().getContentAsString();
 
-        assertThat(contentAsString).doesNotContain(VALID);
-        assertThat(contentAsString).contains(DEPLOYABLE);
-        assertThat(contentAsString).contains(RENDER_ERRORS);
-        assertThat(contentAsString).doesNotContain(LINT_WARNING);
-        assertThat(contentAsString).doesNotContain(LINT_ERROR);
-        assertThat(contentAsString).contains(VERSION_USED);
+        assertThat(contentAsString)
+            .doesNotContain(VALID)
+            .contains(DEPLOYABLE)
+            .contains(RENDER_ERRORS)
+            .doesNotContain(LINT_WARNING)
+            .doesNotContain(LINT_ERROR)
+            .contains(VERSION_USED);
         assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 }

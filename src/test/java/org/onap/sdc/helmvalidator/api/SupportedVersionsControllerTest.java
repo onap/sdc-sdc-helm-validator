@@ -60,8 +60,9 @@ class SupportedVersionsControllerTest {
             .supportedVersions();
         List<String> supportedVersions = supportedVersionsResponse.getBody().get(VERSIONS);
 
-        assertThat(supportedVersions).isNotNull();
-        assertThat(supportedVersions).hasSize(EXPECTED_SIZE);
-        assertThat(supportedVersions).contains(SAMPLE_VERSION1, SAMPLE_VERSION2, SAMPLE_VERSION3);
+        assertThat(supportedVersions)
+            .isNotNull()
+            .hasSize(EXPECTED_SIZE)
+            .containsExactly(SAMPLE_VERSION1, SAMPLE_VERSION2, SAMPLE_VERSION3);
     }
 }
