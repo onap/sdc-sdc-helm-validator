@@ -47,6 +47,7 @@ public class ValidationService {
     private static final String LINT_OPTION = "lint";
     private static final String HELM_SUMMARY_MESSAGE_PATTERN =
         "Error: \\d* chart\\(s\\) linted, \\d* chart\\(s\\) failed";
+    private static final String WHITESPACE_CHARACTER = "[\\s]";
     private static final boolean INVALID_RESULT = false;
 
     private final FileManager fileManager;
@@ -91,7 +92,9 @@ public class ValidationService {
         String chartPath = fileManager.saveFile(file);
         try {
             String helmVersion = getSupportedHelmVersion(desiredVersion, chartPath);
-            return validateChart(helmVersion, file, isLinted, isStrictLinted, chartPath);
+            LOGGER.info("Start validation of file: {}, with helm version: {}",
+                replaceBlankCharacters(file.getOriginalFilename()), helmVersion);
+            return validateChart(helmVersion, isLinted, isStrictLinted, chartPath);
         } finally {
             LOGGER.info("File process finished");
             fileManager.removeFile(chartPath);
@@ -115,11 +118,15 @@ public class ValidationService {
             .orElseThrow(() -> new NotSupportedVersionException(desiredVersion));
     }
 
-    private ValidationResult validateChart(String version, MultipartFile file, boolean isLinted, boolean isStrictLinted,
-        String chartPath) {
-        LOGGER.info("Start validation of file: {}, with helm version: {}",
-            file.getOriginalFilename(), version);
+    private String replaceBlankCharacters(String string) {
+        if (string != null) {
+            return string.replaceAll(WHITESPACE_CHARACTER, "_");
+        }
+        return "_";
+    }
 
+    private ValidationResult validateChart(String version, boolean isLinted, boolean isStrictLinted,
+        String chartPath) {
         TemplateValidationResult templateValidationResult = runHelmTemplate(
             buildHelmTemplateCommand(version, chartPath));
         LOGGER.info("Helm template finished");
