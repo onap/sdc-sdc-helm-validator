@@ -22,6 +22,30 @@
       "revId": "17823ae4361df74af63f2d84c540fd874f2cb31e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec690fb4_b7663305",
+        "filename": "src/test/java/org/onap/sdc/helmvalidator/helm/validation/FileManagerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-03-22T12:38:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cd279f5_f2e67138",
+      "range": {
+        "startLine": 75,
+        "startChar": 65,
+        "endLine": 75,
+        "endChar": 86
+      },
+      "revId": "17823ae4361df74af63f2d84c540fd874f2cb31e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
