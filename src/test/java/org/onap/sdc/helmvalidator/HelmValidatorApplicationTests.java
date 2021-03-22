@@ -27,7 +27,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class HelmValidatorApplicationTests {
 
     @Test
-    void contextLoads() {
+        // This method check Spring context load - it no requires assertion (Sonar rule java:S2699)
+    void contextLoads() { // NOSONAR
     }
 
 }

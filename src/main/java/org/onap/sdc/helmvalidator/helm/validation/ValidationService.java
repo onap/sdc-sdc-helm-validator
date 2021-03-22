@@ -23,6 +23,7 @@ package org.onap.sdc.helmvalidator.helm.validation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.onap.sdc.helmvalidator.helm.validation.exception.BashExecutionException;
@@ -47,6 +48,7 @@ public class ValidationService {
     private static final String LINT_OPTION = "lint";
     private static final String HELM_SUMMARY_MESSAGE_PATTERN =
         "Error: \\d* chart\\(s\\) linted, \\d* chart\\(s\\) failed";
+    private static final String BLANK_CHARACTERS_REGEX = "[\n|\r|\t]";
     private static final boolean INVALID_RESULT = false;
 
     private final FileManager fileManager;
@@ -91,7 +93,9 @@ public class ValidationService {
         String chartPath = fileManager.saveFile(file);
         try {
             String helmVersion = getSupportedHelmVersion(desiredVersion, chartPath);
-            return validateChart(helmVersion, file, isLinted, isStrictLinted, chartPath);
+            LOGGER.info("Start validation of file: {}, with helm version: {}",
+                replaceBlankCharacters(file.getOriginalFilename()), helmVersion);
+            return validateChart(helmVersion, isLinted, isStrictLinted, chartPath);
         } finally {
             LOGGER.info("File process finished");
             fileManager.removeFile(chartPath);
@@ -115,11 +119,15 @@ public class ValidationService {
             .orElseThrow(() -> new NotSupportedVersionException(desiredVersion));
     }
 
-    private ValidationResult validateChart(String version, MultipartFile file, boolean isLinted, boolean isStrictLinted,
-        String chartPath) {
-        LOGGER.info("Start validation of file: {}, with helm version: {}",
-            file.getOriginalFilename(), version);
+    private String replaceBlankCharacters(String string) {
+        if (string != null) {
+            return string.replaceAll(BLANK_CHARACTERS_REGEX, "_");
+        }
+        return "_";
+    }
 
+    private ValidationResult validateChart(String version, boolean isLinted, boolean isStrictLinted,
+        String chartPath) {
         TemplateValidationResult templateValidationResult = runHelmTemplate(
             buildHelmTemplateCommand(version, chartPath));
         LOGGER.info("Helm template finished");
