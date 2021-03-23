@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21898aab_8968aa96",
+        "filename": "Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-23T11:48:59Z",
+      "side": 1,
+      "message": "I think it should be changed in pom.",
+      "revId": "78395dea62581d7674572a079a8c55618213eb7c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
