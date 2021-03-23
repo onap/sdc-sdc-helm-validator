@@ -150,7 +150,7 @@
         <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
-        <docker.dockerfile>Dockerfile-local</docker.dockerfile>
+        <docker.dockerfile>dev-resources/Dockerfile-local</docker.dockerfile>
       </properties>
       <build>
         <plugins>

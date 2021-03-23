@@ -31,7 +31,7 @@ make run-docker
 ```
 Example charts are located in the following directory:
 ```
-./charts
+./dev-resources/sample-charts
 ```
 
 ## Available endpoints
