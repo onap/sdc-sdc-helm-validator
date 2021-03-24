@@ -23,6 +23,7 @@ package org.onap.sdc.helmvalidator.helm.validation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.onap.sdc.helmvalidator.helm.validation.exception.BashExecutionException;
@@ -92,8 +93,9 @@ public class ValidationService {
         String chartPath = fileManager.saveFile(file);
         try {
             String helmVersion = getSupportedHelmVersion(desiredVersion, chartPath);
+            String fileName = replaceBlankCharacters(file.getOriginalFilename());
             LOGGER.info("Start validation of file: {}, with helm version: {}",
-                replaceBlankCharacters(file.getOriginalFilename()), helmVersion);
+                fileName, helmVersion);
             return validateChart(helmVersion, isLinted, isStrictLinted, chartPath);
         } finally {
             LOGGER.info("File process finished");
