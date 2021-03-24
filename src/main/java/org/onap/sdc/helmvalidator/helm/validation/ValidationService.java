@@ -92,8 +92,9 @@ public class ValidationService {
         String chartPath = fileManager.saveFile(file);
         try {
             String helmVersion = getSupportedHelmVersion(desiredVersion, chartPath);
+            String fileName = replaceBlankCharacters(file.getOriginalFilename());
             LOGGER.info("Start validation of file: {}, with helm version: {}",
-                replaceBlankCharacters(file.getOriginalFilename()), helmVersion);
+                fileName, helmVersion);
             return validateChart(helmVersion, isLinted, isStrictLinted, chartPath);
         } finally {
             LOGGER.info("File process finished");
