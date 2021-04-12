@@ -49,12 +49,11 @@ This should be a POST with `multipart/form-data` encoding with the following fie
 
 It is possible to provide helm version in three ways:
 1. Select exact version from supported versions e.g. "3.4.1"
-2. Select major helm version e.g. "v2" for Helm 2 or "v3" for Helm 3. In this case app will use the latest supported version.
+2. Select major helm version e.g. "v3" for Helm 3. In this case app will use the latest supported version.
 3. In case when field version is not present in request then app gets helm version from "apiVersion" field located in the main chart (Chart.yaml).
 Mapping rules:
 
-apiVersion: v1 -> the latest available helm 2
-
+apiVersion: v1 -> the latest available helm 3
 apiVersion: v2 -> the latest available helm 3
 
 #### Response

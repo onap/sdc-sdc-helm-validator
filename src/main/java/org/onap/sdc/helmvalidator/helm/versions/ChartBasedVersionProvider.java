@@ -20,12 +20,16 @@
 
 package org.onap.sdc.helmvalidator.helm.versions;
 
+import java.util.List;
 import org.onap.sdc.helmvalidator.helm.versions.exception.NotSupportedApiVersionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ChartBasedVersionProvider {
+
+    private static final List<String> SUPPORTED_API_VERSIONS = List.of("v1", "v2");
+    private static final String HELM_3 = "3";
 
     private final SupportedVersionsProvider supportedVersionsProvider;
     private final ApiVersionsReader apiVersionsReader;
@@ -40,18 +44,14 @@ public class ChartBasedVersionProvider {
 
     public String getVersion(String chartPath) {
         String apiVersion = apiVersionsReader.readVersion(chartPath);
-        return mapToChartVersion(apiVersion);
+        return mapToHelmVersion(apiVersion);
     }
 
-    private String mapToChartVersion(String apiVersion) {
-        switch (apiVersion) {
-            case "v1":
-                return supportedVersionsProvider.getLatestVersion("2");
-            case "v2":
-                return supportedVersionsProvider.getLatestVersion("3");
-            default:
-                throw new NotSupportedApiVersionException("Cannot obtain Helm version from API version: " + apiVersion);
+    private String mapToHelmVersion(String apiVersion) {
+        if (!SUPPORTED_API_VERSIONS.contains(apiVersion)) {
+            throw new NotSupportedApiVersionException("Cannot obtain Helm version from API version: " + apiVersion);
         }
+        return supportedVersionsProvider.getLatestVersion(HELM_3);
     }
 
 }

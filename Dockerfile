@@ -7,7 +7,7 @@ RUN adduser -G onap -D validator
 
 RUN apk add --no-cache bash vim curl wget
 
-ENV HELM_SUPPORTED_VERSIONS=3.5.2,3.4.1,3.3.4,2.17.0,2.14.3
+ENV HELM_SUPPORTED_VERSIONS=3.5.2,3.4.1,3.3.4
 
 #Installing Helm
 COPY scripts/collect_helm_versions_from_web.sh ./opt/helmvalidator/tmp/collect_helm_versions_from_web.sh

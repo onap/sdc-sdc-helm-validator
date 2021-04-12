@@ -27,8 +27,6 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -36,6 +34,9 @@ import org.onap.sdc.helmvalidator.helm.versions.exception.NotSupportedApiVersion
 
 @ExtendWith(MockitoExtension.class)
 class ChartBasedVersionProviderTest {
+
+    private static final String EXPECTED_HELM_VERSION = "3.4.3";
+    private static final String API_VERSION = "v2";
 
     private final String testChartPath = "test/path";
     @Mock
@@ -49,15 +50,14 @@ class ChartBasedVersionProviderTest {
         chartBasedVersionProvider = new ChartBasedVersionProvider(versionsProvider, apiVersionsReader);
     }
 
-    @ParameterizedTest
-    @CsvSource({"v1,2.18", "v2,3.11"})
-    void shouldGetLatestHelmVersionBasedOnApiVersion(String apiVersion, String expectedHelmVersion) {
-        when(apiVersionsReader.readVersion(testChartPath)).thenReturn(apiVersion);
-        when(versionsProvider.getLatestVersion(Mockito.anyString())).thenReturn(expectedHelmVersion);
+    @Test
+    void shouldGetLatestHelmVersionBasedOnApiVersion() {
+        when(apiVersionsReader.readVersion(testChartPath)).thenReturn(API_VERSION);
+        when(versionsProvider.getLatestVersion(Mockito.anyString())).thenReturn(EXPECTED_HELM_VERSION);
 
         String helmVersion = chartBasedVersionProvider.getVersion(testChartPath);
 
-        assertThat(helmVersion).isEqualTo(expectedHelmVersion);
+        assertThat(helmVersion).isEqualTo(EXPECTED_HELM_VERSION);
     }
 
     @Test
