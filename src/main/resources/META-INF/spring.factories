@@ -1,0 +1,3 @@
+#org.springframework.context.ApplicationListener=org.onap.sdc.helmvalidator.config.LoggingEnvironmentPostProcessor
+org.springframework.boot.env.EnvironmentPostProcessor=org.onap.sdc.helmvalidator.config.LoggingEnvironmentPostProcessor
+
