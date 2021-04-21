@@ -52,6 +52,12 @@
       <version>${apache.commons.compress.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.5.7</version>
+    </dependency>
+
   </dependencies>
 
   <dependencyManagement>

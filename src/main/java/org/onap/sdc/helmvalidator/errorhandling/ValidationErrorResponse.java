@@ -20,7 +20,7 @@
 
 package org.onap.sdc.helmvalidator.errorhandling;
 
-class ValidationErrorResponse {
+public class ValidationErrorResponse {
 
     private final String message;
 

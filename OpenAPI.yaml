@@ -1,0 +1,191 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition for SDC Helm validator
+  description: Application for validating Helm charts.
+  version: v0
+servers:
+  - url: 'http://localhost:8080'
+    description: Generated server url
+tags:
+  - name: Actuator
+    description: Monitor and interact
+    externalDocs:
+      description: Spring Boot Actuator Web API Documentation
+      url: 'https://docs.spring.io/spring-boot/docs/current/actuator-api/html/'
+paths:
+  /validate:
+    post:
+      tags:
+        - ValidationService
+      summary: Validate chart
+      description: Web endpoint for Helm charts validation.
+      operationId: validate
+      parameters:
+        - name: versionDesired
+          in: query
+          description: Desired Helm version which should be used to validate the chart
+          required: false
+          schema:
+            type: string
+        - name: isLinted
+          in: query
+          description: 'If false, there will be an attempt to render the chart without linting it first'
+          required: false
+          schema:
+            type: boolean
+            default: false
+        - name: isStrictLinted
+          in: query
+          description: Linting should be strict or not
+          required: false
+          schema:
+            type: boolean
+            default: false
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+                - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  description: Helm chart that should be validated (packed in .tgz format)
+                  format: binary
+      responses:
+        '200':
+          description: Helm chart successfully validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResult'
+        '400':
+          description: Chart cannot be validated using selected version
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+        '500':
+          description: Something went wrong during validation execution
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+  /versions:
+    get:
+      tags:
+        - VersionsService
+      summary: Show Helm versions
+      description: Web endpoint for showing supported Helm versions.
+      operationId: supportedVersions
+      responses:
+        '200':
+          description: Supported Helm versions successfully returned
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VersionsResponse'
+        '500':
+          description: Something went wrong during getting Helm versions
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+  /actuator:
+    get:
+      tags:
+        - Actuator
+      summary: Actuator root web endpoint
+      operationId: links_0
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/Link'
+  /actuator/info:
+    get:
+      tags:
+        - Actuator
+      summary: Actuator web endpoint 'info'
+      operationId: handle_1
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /actuator/health:
+    get:
+      tags:
+        - Actuator
+      summary: Actuator web endpoint 'health'
+      operationId: handle_2
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /actuator/health/**:
+    get:
+      tags:
+        - Actuator
+      summary: Actuator web endpoint 'health-path'
+      operationId: handle_3
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+components:
+  schemas:
+    VersionsResponse:
+      properties:
+        versions:
+          type: array
+          items:
+            type: string
+    ValidationErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    ValidationResult:
+      type: object
+      properties:
+        renderErrors:
+          type: array
+          items:
+            type: string
+        lintWarning:
+          type: array
+          items:
+            type: string
+        lintError:
+          type: array
+          items:
+            type: string
+        versionUsed:
+          type: string
+        valid:
+          type: boolean
+        deployable:
+          type: boolean
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        templated:
+          type: boolean

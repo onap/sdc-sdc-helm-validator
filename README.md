@@ -34,6 +34,8 @@ Example charts are located in the following directory:
 ./dev-resources/sample-charts
 ```
 
+Swagger UI is available on endpoint: /docs. OpenAPI.yaml in the main directory contains OpenAPI 3.0.1 definition.
+
 ## Available endpoints
 * Chart validation:
 
@@ -73,3 +75,7 @@ Json with the following fields:
 Following Json:
 
         [ARRAY OF STRINGS] - supported helm versions
+
+* Swagger UI [GET]
+
+  `http://localhost:[PORT]/docs 
