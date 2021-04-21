@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "ac81d777_93705601",
+        "filename": "src/main/java/org/onap/sdc/helmvalidator/config/EnvProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-04-21T13:42:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f15d0a01_207b02cc",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 1
+      },
+      "revId": "e02c67c45bea62d3fe3059934ac334d3c6cb4ed8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c973f868_91508667",
         "filename": "src/main/java/org/onap/sdc/helmvalidator/config/LoggerConfig.java",
         "patchSetId": 1
@@ -140,6 +164,30 @@
       "revId": "e02c67c45bea62d3fe3059934ac334d3c6cb4ed8",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e57a778_ad3edc14",
+        "filename": "src/main/java/org/onap/sdc/helmvalidator/config/LoggerConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-04-21T13:42:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0f6437ee_80c59eb6",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 8
+      },
+      "revId": "e02c67c45bea62d3fe3059934ac334d3c6cb4ed8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
