@@ -41,7 +41,7 @@ import org.onap.sdc.helmvalidator.helm.versions.exception.ReadFileException;
 
 class ApiVersionsReaderTest {
 
-    private static final String API_VERSION_V2= "v2";
+    private static final String API_VERSION_V2 = "v2";
     private static final String TEST_RESOURCES_TMP = "src/test/resources/tmp";
     private static final Path TEST_CHART_PATH = Path.of(TEST_RESOURCES_TMP).resolve(Path.of("Chart.yaml"));
 

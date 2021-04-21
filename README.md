@@ -44,6 +44,8 @@ or run container with LOG_LEVEL ENV
 docker run -p 8080:8080 -e LOG_LEVEL=INFO onap/org.onap.sdc.sdc-helm-validator:latest
 ```
 
+Swagger UI is available on endpoint: /docs. OpenAPI.yaml in the main directory contains OpenAPI 3.0.1 definition.
+
 ## Available endpoints
 * Chart validation:
 
@@ -83,3 +85,7 @@ Json with the following fields:
 Following Json:
 
         [ARRAY OF STRINGS] - supported helm versions
+
+* Swagger UI [GET]
+
+  `http://localhost:[PORT]/docs 
