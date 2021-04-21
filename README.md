@@ -11,7 +11,7 @@ or
 ```
 make build-docker-local
 ```
-
+##### Helm versions change
 To modify helm versions: 
 
 1. Modify `Dockerfile`, add desired version in line:
@@ -25,6 +25,7 @@ build-docker-local:
 ```
 If you want to clean downloaded files run: `make clean-local-files`
 
+##### Run container locally 
 In order to run docker container locally use: 
 ```
 make run-docker
@@ -32,6 +33,15 @@ make run-docker
 Example charts are located in the following directory:
 ```
 ./dev-resources/sample-charts
+```
+##### Change log level
+To change log level by system environment add to dockerfile following code:
+```
+ENV LOG_LEVEL=<expected level e.g. DEBUG>
+```
+or run container with LOG_LEVEL ENV 
+```
+docker run -p 8080:8080 -e LOG_LEVEL=INFO onap/org.onap.sdc.sdc-helm-validator:latest
 ```
 
 ## Available endpoints
