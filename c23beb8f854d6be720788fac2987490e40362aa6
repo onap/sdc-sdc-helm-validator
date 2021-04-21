@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d8a5752_946a7e1c",
+        "filename": "src/main/java/org/onap/sdc/helmvalidator/api/ValidationController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-04-21T13:46:28Z",
+      "side": 1,
+      "message": "Typo here?",
+      "range": {
+        "startLine": 84,
+        "startChar": 9,
+        "endLine": 84,
+        "endChar": 20
+      },
+      "revId": "c23beb8f854d6be720788fac2987490e40362aa6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
