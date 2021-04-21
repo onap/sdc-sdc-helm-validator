@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9b756458_fef45f05",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-04-21T12:03:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b19106e5_e7fd4974",
+      "range": {
+        "startLine": 14,
+        "startChar": 6,
+        "endLine": 14,
+        "endChar": 32
+      },
+      "revId": "e02c67c45bea62d3fe3059934ac334d3c6cb4ed8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d1677fd_a46fa014",
         "filename": "src/main/java/org/onap/sdc/helmvalidator/config/EnvProvider.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2021-04-21T11:12:13Z",
       "side": 1,
       "message": "Does it need to be a service?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 1
+      },
+      "revId": "e02c67c45bea62d3fe3059934ac334d3c6cb4ed8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f15d0a01_207b02cc",
+        "filename": "src/main/java/org/onap/sdc/helmvalidator/config/EnvProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-04-21T12:03:31Z",
+      "side": 1,
+      "message": "Yes, for autowire in LoggerConfig.",
+      "parentUuid": "6d1677fd_a46fa014",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0f6437ee_80c59eb6",
+        "filename": "src/main/java/org/onap/sdc/helmvalidator/config/LoggerConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-04-21T12:03:31Z",
+      "side": 1,
+      "message": "Unfortunately yes -it is workaround. It  allow to use @PostContruct and log configuration level value after Spring application startup. In otherwise Logs will be visible aboce Spring banner, and could be misleading.",
+      "parentUuid": "c973f868_91508667",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 8
+      },
+      "revId": "e02c67c45bea62d3fe3059934ac334d3c6cb4ed8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5d15358d_3cb91657",
         "filename": "src/main/java/org/onap/sdc/helmvalidator/config/LoggerConfig.java",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "e02c67c45bea62d3fe3059934ac334d3c6cb4ed8",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cd009a2_84de9f79",
+        "filename": "src/main/java/org/onap/sdc/helmvalidator/config/LoggerConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-04-21T12:03:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d15358d_3cb91657",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 42
+      },
+      "revId": "e02c67c45bea62d3fe3059934ac334d3c6cb4ed8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "3173785a_b0c4556c",
+        "filename": "src/main/java/org/onap/sdc/helmvalidator/config/LoggerConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-04-21T12:03:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "241983df_3aa78fa4",
+      "range": {
+        "startLine": 82,
+        "startChar": 26,
+        "endLine": 82,
+        "endChar": 43
+      },
+      "revId": "e02c67c45bea62d3fe3059934ac334d3c6cb4ed8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00bcd501_f7eb7612",
         "filename": "version.properties",
         "patchSetId": 1
@@ -137,6 +257,30 @@
       "revId": "e02c67c45bea62d3fe3059934ac334d3c6cb4ed8",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9f831db_9873e0f6",
+        "filename": "version.properties",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-04-21T12:03:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00bcd501_f7eb7612",
+      "range": {
+        "startLine": 2,
+        "startChar": 5,
+        "endLine": 2,
+        "endChar": 7
+      },
+      "revId": "e02c67c45bea62d3fe3059934ac334d3c6cb4ed8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
