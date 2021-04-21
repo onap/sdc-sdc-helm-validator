@@ -20,8 +20,8 @@
 
 package org.onap.sdc.helmvalidator;
 
-import org.onap.sdc.helmvalidator.config.LoggerConfig;
 import org.onap.sdc.helmvalidator.config.EnvProvider;
+import org.onap.sdc.helmvalidator.config.LoggerConfig;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
