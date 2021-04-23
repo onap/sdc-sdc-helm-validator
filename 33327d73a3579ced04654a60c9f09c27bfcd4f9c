@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "97bb4727_17fabe7c",
+        "filename": "src/main/java/org/onap/sdc/helmvalidator/DocsConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-04-23T07:24:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb9745a8_e20bc2a2",
+      "revId": "33327d73a3579ced04654a60c9f09c27bfcd4f9c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32ab6fcf_2a4f8fb5",
         "filename": "src/main/java/org/onap/sdc/helmvalidator/config/DocsConfiguration.java",
         "patchSetId": 4
