@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14777047_51b033a2",
+        "filename": "README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-04-23T06:52:55Z",
+      "side": 1,
+      "message": "Please add section \u0027##### API documentation\u0027",
+      "revId": "33327d73a3579ced04654a60c9f09c27bfcd4f9c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb9745a8_e20bc2a2",
+        "filename": "src/main/java/org/onap/sdc/helmvalidator/DocsConfiguration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-04-23T06:52:55Z",
+      "side": 1,
+      "message": "Please move it to package config",
+      "revId": "33327d73a3579ced04654a60c9f09c27bfcd4f9c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
