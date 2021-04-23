@@ -108,7 +108,7 @@ public class ValidationService {
         }
 
         if (desiredVersion.startsWith("v")) {
-            String helmMajorVersion = desiredVersion.substring(1);
+            var helmMajorVersion = desiredVersion.substring(1);
             return supportedVersionsProvider.getLatestVersion(helmMajorVersion);
         }
 
@@ -213,7 +213,7 @@ public class ValidationService {
     }
 
     private boolean isNotHelmSummaryMessage(String line) {
-        Pattern pattern = Pattern.compile(HELM_SUMMARY_MESSAGE_PATTERN);
+        var pattern = Pattern.compile(HELM_SUMMARY_MESSAGE_PATTERN);
         return !pattern.matcher(line).matches();
     }
 }

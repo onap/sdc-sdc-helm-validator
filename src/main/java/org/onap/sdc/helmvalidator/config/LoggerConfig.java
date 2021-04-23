@@ -42,7 +42,7 @@ public class LoggerConfig {
 
     public Properties getLoggerProperties() {
         String level = getLogLevel();
-        Properties loggerProperties = new Properties();
+        var loggerProperties = new Properties();
         loggerProperties.setProperty("logging.level.web", level);
         loggerProperties.setProperty("logging.level.org.springframework", level);
         loggerProperties.setProperty("logging.level.org.apache.catalina.core", level);
