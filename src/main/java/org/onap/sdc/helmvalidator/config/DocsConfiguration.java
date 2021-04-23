@@ -55,7 +55,7 @@ public class DocsConfiguration {
     }
 
     private ArraySchema getArraySchema() {
-        ArraySchema arraySchema = new ArraySchema();
+        var arraySchema = new ArraySchema();
         arraySchema.setItems(new StringSchema());
         return arraySchema;
     }

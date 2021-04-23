@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.2.0] - 21/04/2021
 
 - Add a configuration of logging level by 'LOG_LEVEL' system environment variable 
+- Add Swagger with OpenAPI description
 - Supported Helm Versions: 
     - Helm v3: 3.5.2, 3.4.1, 3.3.4
-
 
 ## [1.1.0] - 12/04/2021
 
