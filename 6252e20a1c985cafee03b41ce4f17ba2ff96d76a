@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2f3cd89_689a95a9",
+        "filename": "Changelog.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-04-23T08:01:59Z",
+      "side": 1,
+      "message": "Please move it above supported versions. Supported versions should last element on list, like on previous changes.",
+      "range": {
+        "startLine": 12,
+        "startChar": 1,
+        "endLine": 12,
+        "endChar": 38
+      },
+      "revId": "6252e20a1c985cafee03b41ce4f17ba2ff96d76a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
