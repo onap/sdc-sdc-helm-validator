@@ -18,20 +18,29 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.sdc.helmvalidator;
+package org.onap.sdc.helmvalidator.config;
 
-import org.onap.sdc.helmvalidator.config.LoggerConfig;
-import org.onap.sdc.helmvalidator.config.EnvProvider;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import java.util.Optional;
+import org.springframework.stereotype.Service;
 
-@SpringBootApplication
-public class HelmValidatorApplication {
+@Service
+public class EnvProvider {
 
-    public static void main(String[] args) {
-        new SpringApplicationBuilder(HelmValidatorApplication.class)
-            .properties(new LoggerConfig(EnvProvider.getStandardProvider()).getLoggerProperties())
-            .run(args);
+    public static EnvProvider getStandardProvider() {
+        return new EnvProvider();
+    }
+
+    public String readEnvVariable(String envVariableName) {
+        return Optional.ofNullable(getSystemEnv(envVariableName))
+            .orElseGet(this::getDefaultValue);
+    }
+
+    private String getSystemEnv(String envVariableName) {
+        return System.getenv(envVariableName);
+    }
+
+    private String getDefaultValue() {
+        return LogLevel.getDefaultLevel();
     }
 
 }

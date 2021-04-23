@@ -18,20 +18,27 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.sdc.helmvalidator;
+package org.onap.sdc.helmvalidator.config;
 
-import org.onap.sdc.helmvalidator.config.LoggerConfig;
-import org.onap.sdc.helmvalidator.config.EnvProvider;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-@SpringBootApplication
-public class HelmValidatorApplication {
+public enum LogLevel {
+    FATAL,
+    ERROR,
+    WARN,
+    INFO,
+    DEBUG,
+    TRACE;
 
-    public static void main(String[] args) {
-        new SpringApplicationBuilder(HelmValidatorApplication.class)
-            .properties(new LoggerConfig(EnvProvider.getStandardProvider()).getLoggerProperties())
-            .run(args);
+    static String getDefaultLevel() {
+        return ERROR.toString();
     }
 
+    static List<String> getSupportedLevels() {
+        return Stream.of(values())
+            .map(Enum::toString)
+            .collect(Collectors.toList());
+    }
 }
