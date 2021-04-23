@@ -22,7 +22,6 @@ package org.onap.sdc.helmvalidator.helm.validation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,10 +40,10 @@ public class BashExecutor {
     BashOutput execute(String helmCommand) {
 
         try {
-            ProcessBuilder pb = new ProcessBuilder("/bin/bash", "-c", helmCommand);
-            pb.redirectErrorStream(true);
+            var processBuilder = new ProcessBuilder("/bin/bash", "-c", helmCommand);
+            processBuilder.redirectErrorStream(true);
             LOGGER.debug("Start process");
-            Process process = pb.start();
+            var process = processBuilder.start();
 
             List<String> processOutput = readOutputAndCloseProcess(process);
             return new BashOutput(process.exitValue(), processOutput);
@@ -58,7 +57,7 @@ public class BashExecutor {
 
     private List<String> readOutputAndCloseProcess(Process process) throws IOException, InterruptedException {
 
-        final InputStream inputStream = process.getInputStream();
+        final var inputStream = process.getInputStream();
         final List<String> lines = new BufferedReader(new InputStreamReader(inputStream))
             .lines().collect(Collectors.toList());
 

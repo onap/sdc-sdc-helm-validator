@@ -22,7 +22,6 @@ package org.onap.sdc.helmvalidator.helm.validation;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import org.onap.sdc.helmvalidator.helm.validation.exception.SaveFileException;
@@ -47,7 +46,7 @@ public class FileManager {
     String saveFile(MultipartFile file) {
         LOGGER.debug("Base PATH: {}", basePath);
         try {
-            final Path tmpFilePath = Files.createTempFile(Paths.get(basePath), "chart-", ".tgz");
+            final var tmpFilePath = Files.createTempFile(Paths.get(basePath), "chart-", ".tgz");
             LOGGER.info("Attempt to save file : {}", tmpFilePath);
             Files.copy(file.getInputStream(), tmpFilePath, StandardCopyOption.REPLACE_EXISTING);
             return tmpFilePath.toString();

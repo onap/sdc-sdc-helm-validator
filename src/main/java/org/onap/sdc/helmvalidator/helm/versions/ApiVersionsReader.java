@@ -46,7 +46,7 @@ public class ApiVersionsReader {
     }
 
     private Optional<String> tryReadVersionFromChart(String chartPath) {
-        try (TarArchiveInputStream tarInput = new TarArchiveInputStream(
+        try (var tarInput = new TarArchiveInputStream(
             new GzipCompressorInputStream(new FileInputStream(chartPath)))) {
             return readVersionFromChart(tarInput);
         } catch (IOException e) {
@@ -58,7 +58,7 @@ public class ApiVersionsReader {
         TarArchiveEntry currentEntry;
         while ((currentEntry = tarInput.getNextTarEntry()) != null) {
             if (isMainChartYaml(currentEntry)) {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(tarInput));
+                var bufferedReader = new BufferedReader(new InputStreamReader(tarInput));
                 return bufferedReader.lines()
                     .filter(chartLine -> chartLine.contains(API_VERSION_PREFIX))
                     .map(apiVersionLine -> apiVersionLine.replace(API_VERSION_PREFIX, ""))
@@ -70,7 +70,7 @@ public class ApiVersionsReader {
     }
 
     private boolean isMainChartYaml(TarArchiveEntry currentEntry) {
-        Path entryPath = Path.of(currentEntry.getName());
+        var entryPath = Path.of(currentEntry.getName());
         return currentEntry.isFile()
             && CHART_FILE_NAME.equals(entryPath.getFileName())
             && (entryPath.getNameCount() == MAIN_CHART_DIR_DEPTH);
