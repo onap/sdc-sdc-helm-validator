@@ -23,10 +23,13 @@ package org.onap.sdc.helmvalidator.api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.onap.sdc.helmvalidator.config.docs.ValidationRequestParameters;
 import org.onap.sdc.helmvalidator.errorhandling.ValidationErrorResponse;
 import org.onap.sdc.helmvalidator.helm.validation.ValidationService;
 import org.onap.sdc.helmvalidator.helm.validation.model.ValidationResult;
@@ -65,7 +68,13 @@ public class ValidationController {
      */
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Helm chart successfully validated",
-            content = @Content(schema = @Schema(implementation = ValidationResult.class))),
+            content = {
+                @Content(
+                    schema = @Schema(implementation = ValidationResult.class),
+                    examples = {
+                        @ExampleObject(ref = "#/components/examples/simpleValidation", name = "Simple Validation"),
+                        @ExampleObject(ref = "#/components/examples/validationWithLint", name = "Lint Validation")
+                    })}),
         @ApiResponse(responseCode = "400", description = "Chart cannot be validated using selected version",
             content = @Content(schema = @Schema(implementation = ValidationErrorResponse.class))),
         @ApiResponse(responseCode = "500", description = "Something went wrong during validation execution",
@@ -73,17 +82,25 @@ public class ValidationController {
     })
     @Operation(
         summary = "Validate chart",
-        description = "Web endpoint for Helm charts validation.",
-        tags = "ValidationService")
+        description = "Web endpoint for Helm charts validation. Helm chart in .tgz format is required.",
+        tags = "ValidationService",
+        requestBody = @RequestBody(
+            required = true,
+            content = @Content(mediaType = MediaType.MULTIPART_FORM_DATA_VALUE,
+                schema = @Schema(implementation = ValidationRequestParameters.class)
+            )
+        )
+    )
     @PostMapping(value = "/validate", produces = "application/json", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ValidationResult> validate(
-        @Parameter(description = "Desired Helm version which should be used to validate the chart")
+
+        @Parameter(hidden = true)
         @RequestParam(value = "versionDesired", required = false) String version,
         @Parameter(description = "Helm chart that should be validated (packed in .tgz format)", required = true)
         @RequestParam MultipartFile file,
-        @Parameter(description = "If false, there will be an attempt to render the chart without linting it first")
+        @Parameter(hidden = true)
         @RequestParam(value = "isLinted", required = false, defaultValue = "false") boolean isLinted,
-        @Parameter(description = "Linting should be strict or not")
+        @Parameter(hidden = true)
         @RequestParam(value = "isStrictLinted", required = false, defaultValue = "false") boolean isStrictLinted) {
         LOGGER.debug("Received file: {}, size: {}, helm version: {}",
             file.getOriginalFilename(), file.getSize(), version);
