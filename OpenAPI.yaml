@@ -4,14 +4,14 @@ info:
   description: Application for validating Helm charts.
   version: v0
 servers:
-  - url: 'http://localhost:8080'
+  - url: http://localhost:8080
     description: Generated server url
 tags:
   - name: Actuator
     description: Monitor and interact
     externalDocs:
       description: Spring Boot Actuator Web API Documentation
-      url: 'https://docs.spring.io/spring-boot/docs/current/actuator-api/html/'
+      url: https://docs.spring.io/spring-boot/docs/current/actuator-api/html/
 paths:
   /validate:
     post:
@@ -22,20 +22,34 @@ paths:
       operationId: validate
       parameters:
         - name: versionDesired
-          in: query
-          description: Desired Helm version which should be used to validate the chart
+          in: header
+          description: Desired Helm version which should be used to validate the chart.
+            If parameter is not provided validation is processing with version based
+            on chart's apiVersion. Version could be provided in 'semantic version' or
+            'major version'.
           required: false
           schema:
             type: string
+          examples:
+            Semantic Version:
+              description: Semantic version in X.Y.Z format.
+              value: 3.5.2
+            Major version:
+              description: Major version in vX format. Version is mapped to latest available
+                major version.
+              value: v3
+            None:
+              description: Request could be sent without versionDesired parameter.
         - name: isLinted
-          in: query
-          description: 'If false, there will be an attempt to render the chart without linting it first'
+          in: header
+          description: "If false, there will be an attempt to render the chart without\
+          \ linting it first"
           required: false
           schema:
             type: boolean
             default: false
         - name: isStrictLinted
-          in: query
+          in: header
           description: Linting should be strict or not
           required: false
           schema:
@@ -51,22 +65,28 @@ paths:
               properties:
                 file:
                   type: string
-                  description: Helm chart that should be validated (packed in .tgz format)
+                  description: Helm chart that should be validated (packed in .tgz
+                    format)
                   format: binary
       responses:
-        '200':
-          description: Helm chart successfully validated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationResult'
-        '400':
+        "400":
           description: Chart cannot be validated using selected version
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationErrorResponse'
-        '500':
+        "200":
+          description: Helm chart successfully validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResult'
+              examples:
+                Simple Validation:
+                  $ref: '#/components/examples/simpleValidation'
+                Lint Validation:
+                  $ref: '#/components/examples/validationWithLint'
+        "500":
           description: Something went wrong during validation execution
           content:
             application/json:
@@ -80,18 +100,18 @@ paths:
       description: Web endpoint for showing supported Helm versions.
       operationId: supportedVersions
       responses:
-        '200':
-          description: Supported Helm versions successfully returned
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/VersionsResponse'
-        '500':
+        "500":
           description: Something went wrong during getting Helm versions
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ValidationErrorResponse'
+        "200":
+          description: Supported Helm versions successfully returned
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VersionsResponse'
   /actuator:
     get:
       tags:
@@ -99,7 +119,7 @@ paths:
       summary: Actuator root web endpoint
       operationId: links_0
       responses:
-        '200':
+        "200":
           description: OK
           content:
             '*/*':
@@ -116,7 +136,7 @@ paths:
       summary: Actuator web endpoint 'info'
       operationId: handle_1
       responses:
-        '200':
+        "200":
           description: OK
           content:
             '*/*':
@@ -129,7 +149,7 @@ paths:
       summary: Actuator web endpoint 'health'
       operationId: handle_2
       responses:
-        '200':
+        "200":
           description: OK
           content:
             '*/*':
@@ -142,7 +162,7 @@ paths:
       summary: Actuator web endpoint 'health-path'
       operationId: handle_3
       responses:
-        '200':
+        "200":
           description: OK
           content:
             '*/*':
@@ -189,3 +209,11 @@ components:
           type: string
         templated:
           type: boolean
+  examples:
+    simpleValidation:
+      description: Example response when parameter isLinted is set to false
+      value: "{\"renderErrors\":[],\"versionUsed\":\"3.5.2\",\"deployable\":true}"
+    validationWithLint:
+      description: Example response when parameter isLinted is set to true
+      value: "{\"renderErrors\":[],\"lintWarning\":[],\"lintError\":[],\"versionUsed\"\
+        :\"3.5.2\",\"valid\":true,\"deployable\":true}"

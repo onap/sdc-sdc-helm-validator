@@ -22,13 +22,19 @@ package org.onap.sdc.helmvalidator.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.ArrayList;
+import java.util.Collections;
 import org.onap.sdc.helmvalidator.errorhandling.ValidationErrorResponse;
 import org.onap.sdc.helmvalidator.helm.validation.ValidationService;
+import org.onap.sdc.helmvalidator.helm.validation.model.LintValidationResult;
+import org.onap.sdc.helmvalidator.helm.validation.model.TemplateValidationResult;
 import org.onap.sdc.helmvalidator.helm.validation.model.ValidationResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +71,13 @@ public class ValidationController {
      */
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Helm chart successfully validated",
-            content = @Content(schema = @Schema(implementation = ValidationResult.class))),
+            content = {
+                @Content(
+                    schema = @Schema(implementation = ValidationResult.class),
+                    examples = {
+                        @ExampleObject(ref = "#/components/examples/simpleValidation", name = "Simple Validation"),
+                        @ExampleObject(ref = "#/components/examples/validationWithLint", name = "Lint Validation")
+                    })}),
         @ApiResponse(responseCode = "400", description = "Chart cannot be validated using selected version",
             content = @Content(schema = @Schema(implementation = ValidationErrorResponse.class))),
         @ApiResponse(responseCode = "500", description = "Something went wrong during validation execution",
@@ -77,13 +89,19 @@ public class ValidationController {
         tags = "ValidationService")
     @PostMapping(value = "/validate", produces = "application/json", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ValidationResult> validate(
-        @Parameter(description = "Desired Helm version which should be used to validate the chart")
+        @Parameter(description = "Desired Helm version which should be used to validate the chart. If parameter is not provided validation is processing with version based on chart's apiVersion. Version could be provided in 'semantic version' or 'major version'.",
+            in = ParameterIn.HEADER,
+            examples = {
+                @ExampleObject(name = "Semantic Version", value = "3.5.2", description = "Semantic version in X.Y.Z format."),
+                @ExampleObject(name = "Major version", value = "v3", description = "Major version in vX format. Version is mapped to latest available major version."),
+                @ExampleObject(name = "None", description = "Request could be sent without versionDesired parameter.")
+            })
         @RequestParam(value = "versionDesired", required = false) String version,
         @Parameter(description = "Helm chart that should be validated (packed in .tgz format)", required = true)
         @RequestParam MultipartFile file,
-        @Parameter(description = "If false, there will be an attempt to render the chart without linting it first")
+        @Parameter(in = ParameterIn.HEADER, description = "If false, there will be an attempt to render the chart without linting it first")
         @RequestParam(value = "isLinted", required = false, defaultValue = "false") boolean isLinted,
-        @Parameter(description = "Linting should be strict or not")
+        @Parameter(in = ParameterIn.HEADER, description = "Linting should be strict or not")
         @RequestParam(value = "isStrictLinted", required = false, defaultValue = "false") boolean isStrictLinted) {
         LOGGER.debug("Received file: {}, size: {}, helm version: {}",
             file.getOriginalFilename(), file.getSize(), version);

@@ -81,7 +81,9 @@ class LoggerConfigTest {
     private void assertThatAllLogPropertiesHasExpectedValue(Properties properties, String expectedValue) {
         assertThat(properties.getProperty("logging.level.web")).isEqualTo(expectedValue);
         assertThat(properties.getProperty("logging.level.org.springframework")).isEqualTo(expectedValue);
+        assertThat(properties.getProperty("logging.level.org.springdoc")).isEqualTo(expectedValue);
         assertThat(properties.getProperty("logging.level.org.apache.catalina.core")).isEqualTo(expectedValue);
+        assertThat(properties.getProperty("logging.level.org.apache.tomcat")).isEqualTo(expectedValue);
         assertThat(properties.getProperty("logging.level.org.onap.sdc.helmvalidator")).isEqualTo(expectedValue);
     }
 

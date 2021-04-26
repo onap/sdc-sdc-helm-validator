@@ -50,7 +50,9 @@ public class LoggerConfig {
         var loggerProperties = new Properties();
         loggerProperties.setProperty("logging.level.web", level);
         loggerProperties.setProperty("logging.level.org.springframework", level);
+        loggerProperties.setProperty("logging.level.org.springdoc", level);
         loggerProperties.setProperty("logging.level.org.apache.catalina.core", level);
+        loggerProperties.setProperty("logging.level.org.apache.tomcat", level);
         loggerProperties.setProperty("logging.level.org.onap.sdc.helmvalidator", level);
         loggerProperties.setProperty("spring.mvc.log-request-details", isDebugLevel().toString());
 
