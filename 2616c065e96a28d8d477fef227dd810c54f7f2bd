@@ -1,0 +1,7 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+2: Piotr Marcinkiewicz <piotr.marcinkiewicz@nokia.com>
+Submitted-by: Piotr Marcinkiewicz <piotr.marcinkiewicz@nokia.com>
+Submitted-at: Wed, 28 Apr 2021 08:34:50 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/sdc/sdc-helm-validator/+/120961
+Project: sdc/sdc-helm-validator
+Branch: refs/heads/master
