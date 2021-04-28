@@ -46,6 +46,30 @@
       "revId": "e2d0e3d865a0ec6c45963be43c6df89aa605ed63",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0781243a_60dc3ce2",
+        "filename": "OpenAPI.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6592
+      },
+      "writtenOn": "2021-04-28T06:50:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ca8bb14_88c8fd54",
+      "range": {
+        "startLine": 25,
+        "startChar": 14,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "e2d0e3d865a0ec6c45963be43c6df89aa605ed63",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
