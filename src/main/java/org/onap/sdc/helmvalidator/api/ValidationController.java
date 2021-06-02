@@ -106,6 +106,7 @@ public class ValidationController {
             file.getOriginalFilename(), file.getSize(), version);
         ValidationResult result = validationService
             .process(version, file, isLinted, isStrictLinted);
+        LOGGER.debug("Validation result: {}" , result);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

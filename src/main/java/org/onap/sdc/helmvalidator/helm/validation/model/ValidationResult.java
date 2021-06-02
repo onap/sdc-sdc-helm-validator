@@ -95,4 +95,16 @@ public class ValidationResult {
     public String getVersionUsed() {
         return versionUsed;
     }
+
+    @Override
+    public String toString() {
+        return "ValidationResult{" +
+            "isDeployable=" + isDeployable +
+            ", renderErrors=" + renderErrors +
+            ", isValid=" + isValid +
+            ", lintWarning=" + lintWarning +
+            ", lintError=" + lintError +
+            ", versionUsed=" + versionUsed +
+            "}";
+    }
 }
