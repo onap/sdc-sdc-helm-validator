@@ -10,7 +10,7 @@
   </parent>
   <groupId>org.onap.sdc</groupId>
   <artifactId>sdc-helm-validator</artifactId>
-  <version>1.2.0-SNAPSHOT</version>
+  <version>1.2.1-SNAPSHOT</version>
   <name>helmvalidator</name>
   <description>Spring-Boot application for validating helm charts</description>
 
