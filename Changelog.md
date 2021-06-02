@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.1] - 07/06/2021
+
+- Add logging validation response in debug mode
+
 ## [1.2.0] - 21/04/2021
 
 - Add a configuration of logging level by 'LOG_LEVEL' system environment variable 
