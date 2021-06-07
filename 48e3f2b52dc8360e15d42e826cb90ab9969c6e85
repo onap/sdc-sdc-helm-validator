@@ -22,6 +22,30 @@
       "revId": "48e3f2b52dc8360e15d42e826cb90ab9969c6e85",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f25d6f5c_df7e4b3c",
+        "filename": "src/main/java/org/onap/sdc/helmvalidator/helm/validation/model/ValidationResult.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 6592
+      },
+      "writtenOn": "2021-06-07T07:12:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc37825a_fa0f520f",
+      "range": {
+        "startLine": 102,
+        "startChar": 13,
+        "endLine": 102,
+        "endChar": 14
+      },
+      "revId": "48e3f2b52dc8360e15d42e826cb90ab9969c6e85",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
