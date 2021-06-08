@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d058aaf1_97d3320f",
+        "filename": "src/main/java/org/onap/sdc/helmvalidator/api/ValidationController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-06-08T06:55:58Z",
+      "side": 1,
+      "message": "Consider adding the filename to the log. Would be easier to find in the log etc.",
+      "range": {
+        "startLine": 109,
+        "startChar": 8,
+        "endLine": 109,
+        "endChar": 55
+      },
+      "revId": "471a19170d2fc7f7ad94875e8873a2b4043a39dd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
