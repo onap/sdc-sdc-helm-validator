@@ -20,8 +20,8 @@
     <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
 
 		<docker-maven-plugin.version>0.34.1</docker-maven-plugin.version>
-		<spring.version>2.4.3</spring.version>
-		<apache.commons.compress.version>1.20</apache.commons.compress.version>
+		<spring.version>2.5.3</spring.version>
+		<apache.commons.compress.version>1.21</apache.commons.compress.version>
 
     <docker.dockerfile>Dockerfile</docker.dockerfile>
     <docker-image.name>onap/${project.groupId}.${project.artifactId}</docker-image.name>
