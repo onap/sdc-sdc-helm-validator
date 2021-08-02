@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.2] - 02/08/2021
+
+- SDC-3647 Fix vulnerabilities
+    - spring.version 2.4.3 -> 2.5.3
+    - apache.commons.compress.version 1.20 -> 1.21
+
 ## [1.2.1] - 07/06/2021
 
 - Add logging validation response in debug mode
