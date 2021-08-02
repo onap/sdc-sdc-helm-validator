@@ -20,7 +20,7 @@
     <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
 
 		<docker-maven-plugin.version>0.34.1</docker-maven-plugin.version>
-		<spring.version>2.5.3</spring.version>
+		<spring.version>2.5.0</spring.version>
 		<apache.commons.compress.version>1.21</apache.commons.compress.version>
 
     <docker.dockerfile>Dockerfile</docker.dockerfile>
