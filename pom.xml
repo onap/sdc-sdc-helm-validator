@@ -24,7 +24,7 @@
 		<apache.commons.compress.version>1.21</apache.commons.compress.version>
 
     <docker.dockerfile>Dockerfile</docker.dockerfile>
-    <docker-image.name>onap/${project.groupId}.${project.artifactId}</docker-image.name>
+    <docker-image.name>onap/${project.artifactId}</docker-image.name>
     <docker-image.registry>${onap.nexus.dockerregistry.daily}</docker-image.registry>
     <docker-image.tag.latest>latest</docker-image.tag.latest>
   </properties>
