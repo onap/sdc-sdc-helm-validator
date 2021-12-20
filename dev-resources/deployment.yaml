@@ -18,7 +18,7 @@ spec:
       containers:
         - name: helm-client-validator
           imagePullPolicy: IfNotPresent
-          image: onap/org.onap.sdc.sdc-helm-validator:latest
+          image: onap/sdc-helm-validator:latest
           resources:
             requests:
               memory: "256Mi"
