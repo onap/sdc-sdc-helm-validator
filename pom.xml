@@ -10,7 +10,7 @@
   </parent>
   <groupId>org.onap.sdc</groupId>
   <artifactId>sdc-helm-validator</artifactId>
-  <version>1.2.2-SNAPSHOT</version>
+  <version>1.3.0-SNAPSHOT</version>
   <name>helmvalidator</name>
   <description>Spring-Boot application for validating helm charts</description>
 
@@ -24,7 +24,7 @@
 		<apache.commons.compress.version>1.21</apache.commons.compress.version>
 
     <docker.dockerfile>Dockerfile</docker.dockerfile>
-    <docker-image.name>onap/${project.groupId}.${project.artifactId}</docker-image.name>
+    <docker-image.name>onap/${project.artifactId}</docker-image.name>
     <docker-image.registry>${onap.nexus.dockerregistry.daily}</docker-image.registry>
     <docker-image.tag.latest>latest</docker-image.tag.latest>
   </properties>
