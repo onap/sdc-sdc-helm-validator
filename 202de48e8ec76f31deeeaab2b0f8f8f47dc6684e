@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c41e21f_c073b985",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-12-20T07:40:40Z",
+      "side": 1,
+      "message": "Please also top up version here and in version.properties to 1.3.0 \n1. For release image with new name and version\n2. For keep 1.2.x for potential releases in Jakarta \n\nPlease update changelog.md",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 25
+      },
+      "revId": "202de48e8ec76f31deeeaab2b0f8f8f47dc6684e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
