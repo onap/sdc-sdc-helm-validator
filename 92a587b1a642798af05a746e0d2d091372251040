@@ -1,0 +1,7 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+2: Tomasz Wr�bel <tomasz.wrobel@nokia.com>
+Submitted-by: Tomasz Wr�bel <tomasz.wrobel@nokia.com>
+Submitted-at: Tue, 28 Dec 2021 09:35:09 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/sdc/sdc-helm-validator/+/126380
+Project: sdc/sdc-helm-validator
+Branch: refs/heads/master
