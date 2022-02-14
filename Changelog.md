@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.1] - 14/02/2022
+- SDC-3879 Fix Vulnerabilities
+
 ## [1.3.0] - 20/12/2021
 
 - SDC-3821 Align container image naming
