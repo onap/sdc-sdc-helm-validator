@@ -23,7 +23,7 @@
 		<spring.version>2.5.9</spring.version>
     <spring-cloud.version>2020.0.4</spring-cloud.version>
 		<springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
-		<apache.commons.compress.version>1.21</apache.commons.compress.version>
+    <apache.commons.compress.version>1.25.0</apache.commons.compress.version>
 
     <docker.dockerfile>Dockerfile</docker.dockerfile>
     <docker-image.name>onap/${project.artifactId}</docker-image.name>
