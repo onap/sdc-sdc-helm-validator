@@ -19,11 +19,11 @@
 
     <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
 
-		<docker-maven-plugin.version>0.34.1</docker-maven-plugin.version>
-		<spring.version>2.5.9</spring.version>
+    <docker-maven-plugin.version>0.34.1</docker-maven-plugin.version>
+    <spring.version>2.5.9</spring.version>
     <spring-cloud.version>2020.0.4</spring-cloud.version>
-		<springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
-		<apache.commons.compress.version>1.21</apache.commons.compress.version>
+    <springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
+    <apache.commons.compress.version>1.25.0</apache.commons.compress.version>
 
     <docker.dockerfile>Dockerfile</docker.dockerfile>
     <docker-image.name>onap/${project.artifactId}</docker-image.name>
@@ -43,9 +43,9 @@
     </dependency>
 
     <dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-sleuth</artifactId>
-		</dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-sleuth</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
