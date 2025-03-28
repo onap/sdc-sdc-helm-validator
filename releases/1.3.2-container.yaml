@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '1.3.2'
+project: 'sdc-sdc-helm-validator'
+log_dir: 'sdc-sdc-helm-validator-maven-docker-stage-master/765/'
+ref: 237ef8d4cad285abfe657664b6d5ae3161f1742d
+containers:
+  - name: 'sdc-helm-validator'
+    version: '1.3.2-20250328T113234Z'
