@@ -1,9 +1,9 @@
 FROM eclipse-temurin:11-alpine
 
 ARG VERSION=${version}
-
+ENV GROUP=onap
 USER root
-RUN adduser -G onap -D validator
+RUN addgroup $GROUP && adduser -G $GROUP -D validator
 
 RUN apk add --no-cache bash vim curl wget
 
