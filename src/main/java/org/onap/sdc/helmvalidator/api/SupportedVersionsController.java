@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import org.onap.sdc.helmvalidator.errorhandling.ValidationErrorResponse;
 import org.onap.sdc.helmvalidator.helm.versions.SupportedVersionsProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +42,6 @@ public class SupportedVersionsController {
 
     private final SupportedVersionsProvider versionsProvider;
 
-    @Autowired
     public SupportedVersionsController(SupportedVersionsProvider provider) {
         this.versionsProvider = provider;
     }

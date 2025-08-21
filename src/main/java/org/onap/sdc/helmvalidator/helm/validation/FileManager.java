@@ -27,7 +27,6 @@ import java.nio.file.StandardCopyOption;
 import org.onap.sdc.helmvalidator.helm.validation.exception.SaveFileException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,7 +37,6 @@ public class FileManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileManager.class);
     private final String basePath;
 
-    @Autowired
     FileManager(@Value("${app.config.charts-base-path}") String basePath) {
         this.basePath = basePath;
     }

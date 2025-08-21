@@ -35,7 +35,6 @@ import org.onap.sdc.helmvalidator.helm.versions.ChartBasedVersionProvider;
 import org.onap.sdc.helmvalidator.helm.versions.SupportedVersionsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -67,7 +66,6 @@ public class ValidationService {
      * @param supportedVersionsProvider object providing supported versions of Helm
      * @param chartBasedVersionProvider object allowing to derive Helm version from a chart
      */
-    @Autowired
     public ValidationService(
         FileManager fileManager, BashExecutor executor,
         SupportedVersionsProvider supportedVersionsProvider,

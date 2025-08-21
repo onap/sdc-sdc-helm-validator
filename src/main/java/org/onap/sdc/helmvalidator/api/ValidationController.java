@@ -35,7 +35,6 @@ import org.onap.sdc.helmvalidator.helm.validation.ValidationService;
 import org.onap.sdc.helmvalidator.helm.validation.model.ValidationResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -52,7 +51,6 @@ public class ValidationController {
 
     private final ValidationService validationService;
 
-    @Autowired
     public ValidationController(ValidationService validationService) {
         this.validationService = validationService;
     }

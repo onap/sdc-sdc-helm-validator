@@ -22,7 +22,6 @@ package org.onap.sdc.helmvalidator.helm.versions;
 
 import java.util.List;
 import org.onap.sdc.helmvalidator.helm.versions.exception.NotSupportedApiVersionException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,7 +33,6 @@ public class ChartBasedVersionProvider {
     private final SupportedVersionsProvider supportedVersionsProvider;
     private final ApiVersionsReader apiVersionsReader;
 
-    @Autowired
     public ChartBasedVersionProvider(
         SupportedVersionsProvider supportedVersionsProvider,
         ApiVersionsReader apiVersionsReader) {

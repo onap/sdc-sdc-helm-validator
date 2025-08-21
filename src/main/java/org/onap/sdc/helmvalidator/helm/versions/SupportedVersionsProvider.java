@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.onap.sdc.helmvalidator.helm.validation.exception.NotSupportedVersionException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,7 +32,6 @@ public class SupportedVersionsProvider {
 
     private final SystemEnvVersionsReader versionsReader;
 
-    @Autowired
     public SupportedVersionsProvider(SystemEnvVersionsReader versionsReader) {
         this.versionsReader = versionsReader;
     }
