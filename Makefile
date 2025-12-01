@@ -15,4 +15,4 @@ clean-local-files:
 	rm -rf ./scripts/helm_tmp ./scripts/helm_versions
 
 run-docker:
-	docker run -p 8080:8080 onap/org.onap.sdc.sdc-helm-validator:latest
+	docker run -p 8080:8080 onap/sdc-helm-validator:latest
