@@ -14,6 +14,31 @@
   <name>helmvalidator</name>
   <description>Spring-Boot application for validating helm charts</description>
 
+   <repositories>
+    <repository>
+      <id>onap-releases</id>
+      <name>onap-releases</name>
+      <url>https://nexus.onap.org/content/repositories/releases/</url>
+    </repository>
+    <repository>
+      <id>onap-snapshots</id>
+      <name>onap-snapshots</name>
+      <url>https://nexus.onap.org/content/repositories/snapshots/</url>
+    </repository>
+  </repositories>
+   <pluginRepositories>
+    <pluginRepository>
+      <id>onap-releases</id>
+      <name>onap-releases</name>
+      <url>https://nexus.onap.org/content/repositories/releases/</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>onap-snapshots</id>
+      <name>onap-snapshots</name>
+      <url>https://nexus.onap.org/content/repositories/snapshots/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
   <properties>
     <java.version>11</java.version>
 
