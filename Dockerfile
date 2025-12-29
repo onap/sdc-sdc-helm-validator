@@ -3,11 +3,20 @@ FROM eclipse-temurin:11-alpine
 ARG VERSION=${version}
 ENV GROUP=onap
 USER root
+
 RUN addgroup $GROUP && adduser -G $GROUP -D validator
 
 RUN apk add --no-cache bash vim curl wget
 
-ENV HELM_SUPPORTED_VERSIONS=3.5.2,3.4.1,3.3.4
+ENV GOLANG_VERSION=1.25.5
+RUN wget https://go.dev/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz \
+    && tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz \
+    && rm go${GOLANG_VERSION}.linux-amd64.tar.gz
+ENV PATH=$PATH:/usr/local/go/bin
+
+RUN go version
+
+ENV HELM_SUPPORTED_VERSIONS=3.14.4
 
 #Installing Helm
 COPY scripts/collect_helm_versions_from_web.sh ./opt/helmvalidator/tmp/collect_helm_versions_from_web.sh

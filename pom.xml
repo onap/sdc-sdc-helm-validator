@@ -26,6 +26,7 @@
     <apache.commons.compress.version>1.27.1</apache.commons.compress.version>
     <apache.commons.codec.version>1.18.0</apache.commons.codec.version>
     <apache.commons.lang3.version>3.17.0</apache.commons.lang3.version>
+    <tomcat-embed.version>9.0.99</tomcat-embed.version>
 
     <docker.dockerfile>Dockerfile</docker.dockerfile>
     <docker-image.name>onap/${project.artifactId}</docker-image.name>
@@ -86,6 +87,22 @@
       <version>${springdoc-openapi-ui.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-core</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-websocket</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-el</artifactId>
+    </dependency>
+
+
   </dependencies>
 
   <dependencyManagement>
@@ -104,6 +121,25 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+      <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-core</artifactId>
+        <version>${tomcat-embed.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-websocket</artifactId>
+        <version>${tomcat-embed.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-el</artifactId>
+        <version>${tomcat-embed.version}</version>
+      </dependency>
+
     </dependencies>
   </dependencyManagement>
 
