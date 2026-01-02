@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac924184_ca8576cd",
+        "filename": "Dockerfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 7849
+      },
+      "writtenOn": "2026-01-02T13:44:03Z",
+      "side": 1,
+      "message": "How are we fixing any vulnerabilities by installing more packages in the image?",
+      "revId": "5a61dcc684e9889d7266bf003a6387153e0a520f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    }
+  ]
+}
