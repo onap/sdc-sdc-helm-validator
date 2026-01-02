@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef0213ec_ef7ff0fd",
+        "filename": "Dockerfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 7849
+      },
+      "writtenOn": "2026-01-02T13:57:48Z",
+      "side": 1,
+      "message": "What do we need `git` for here?",
+      "revId": "5a61dcc684e9889d7266bf003a6387153e0a520f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac924184_ca8576cd",
         "filename": "Dockerfile",
         "patchSetId": 2
