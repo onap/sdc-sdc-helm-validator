@@ -16,6 +16,23 @@
       "message": "How are we fixing any vulnerabilities by installing more packages in the image?",
       "revId": "5a61dcc684e9889d7266bf003a6387153e0a520f",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4974032b_ee1871f7",
+        "filename": "pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 7849
+      },
+      "writtenOn": "2026-01-02T13:56:09Z",
+      "side": 1,
+      "message": "Please move these dependency declarations into the `dependencyManagement` block instead of declaring them separately\nPlease also use a `${tomcat-embed.version}` placeholder to declare the `9.0.99` version only once and to eliminate the possibility of mismatches",
+      "revId": "5a61dcc684e9889d7266bf003a6387153e0a520f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
     }
   ]
 }
