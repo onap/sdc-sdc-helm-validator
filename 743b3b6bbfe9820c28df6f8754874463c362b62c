@@ -16,6 +16,24 @@
       "message": "Please remove the `dependency` declarations here. You do not have a direct dependency on the tomcat deps. Your change is only about updating the versions of the transitive dependencies that are pulled in by something like `spring-boot-starter-web` that you have a direct dependency on",
       "revId": "743b3b6bbfe9820c28df6f8754874463c362b62c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baa6d617_99224bbf",
+        "filename": "pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 8536
+      },
+      "writtenOn": "2026-01-07T09:50:06Z",
+      "side": 1,
+      "message": "Addressed.",
+      "parentUuid": "a41894b6_bd42f566",
+      "revId": "743b3b6bbfe9820c28df6f8754874463c362b62c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
     }
   ]
 }
