@@ -18,6 +18,24 @@
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5a1e893_a3e3358e",
+        "filename": "Dockerfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8536
+      },
+      "writtenOn": "2026-01-07T07:51:32Z",
+      "side": 1,
+      "message": "removed unnecessary git package.",
+      "parentUuid": "ef0213ec_ef7ff0fd",
+      "revId": "5a61dcc684e9889d7266bf003a6387153e0a520f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac924184_ca8576cd",
@@ -66,6 +84,24 @@
       "writtenOn": "2026-01-02T13:56:09Z",
       "side": 1,
       "message": "Please move these dependency declarations into the `dependencyManagement` block instead of declaring them separately\nPlease also use a `${tomcat-embed.version}` placeholder to declare the `9.0.99` version only once and to eliminate the possibility of mismatches",
+      "revId": "5a61dcc684e9889d7266bf003a6387153e0a520f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88bf3898_0c4818d4",
+        "filename": "pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 8536
+      },
+      "writtenOn": "2026-01-07T07:51:32Z",
+      "side": 1,
+      "message": "As per the feedback added the tomcat dependencies to \u003cdependencyManagement\u003e block and added place holder for version",
+      "parentUuid": "4974032b_ee1871f7",
       "revId": "5a61dcc684e9889d7266bf003a6387153e0a520f",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
     }
