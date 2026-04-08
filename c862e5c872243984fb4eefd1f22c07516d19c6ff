@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30cc9c61_91214197",
+        "filename": "Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7849
+      },
+      "writtenOn": "2026-04-08T12:02:01Z",
+      "side": 1,
+      "message": "Could you explain what this stage is supposed to do? You are not copying anything from it to the second stage, so why is it needed?",
+      "revId": "c862e5c872243984fb4eefd1f22c07516d19c6ff",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    }
+  ]
+}
