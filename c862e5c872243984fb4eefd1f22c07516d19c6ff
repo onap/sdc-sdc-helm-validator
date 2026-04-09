@@ -87,6 +87,24 @@
       "parentUuid": "cb046486_b268f4b1",
       "revId": "c862e5c872243984fb4eefd1f22c07516d19c6ff",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3a71220_921a436b",
+        "filename": "Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 8536
+      },
+      "writtenOn": "2026-04-09T06:44:42Z",
+      "side": 1,
+      "message": "Sure, We removed the manually pin and download a specific Go version (ENV GOLANG_VERSION\u003d1.25.5). And also we have few critical issues in GoLang 1.25.5, So we are using golang:alpine image.\nAnd Also to make the image clean and simple in runtime we separated build and run stage.",
+      "parentUuid": "a4377fd0_8bcfeff4",
+      "revId": "c862e5c872243984fb4eefd1f22c07516d19c6ff",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
     }
   ]
 }
