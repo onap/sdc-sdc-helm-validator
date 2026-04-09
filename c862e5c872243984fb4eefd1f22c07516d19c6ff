@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69e46f06_e4d32691",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7849
+      },
+      "writtenOn": "2026-04-09T06:13:01Z",
+      "side": 1,
+      "message": "And I would suggest to change the title of this CR to `Remove critical CVES in docker image`",
+      "revId": "c862e5c872243984fb4eefd1f22c07516d19c6ff",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30cc9c61_91214197",
