@@ -69,6 +69,24 @@
       "parentUuid": "30cc9c61_91214197",
       "revId": "c862e5c872243984fb4eefd1f22c07516d19c6ff",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4377fd0_8bcfeff4",
+        "filename": "Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7849
+      },
+      "writtenOn": "2026-04-09T06:28:29Z",
+      "side": 1,
+      "message": "Please do not resolve review comments. The reviewer should decide if review comment is really addressed.\n\nLet me phrase this differently: I don\u0027t understand your change. Please explain in more detail what you are doing here",
+      "parentUuid": "cb046486_b268f4b1",
+      "revId": "c862e5c872243984fb4eefd1f22c07516d19c6ff",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
     }
   ]
 }
