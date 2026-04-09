@@ -141,6 +141,24 @@
       "parentUuid": "e1388085_9f85349a",
       "revId": "c862e5c872243984fb4eefd1f22c07516d19c6ff",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a1dba5b_5d997f2d",
+        "filename": "Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7849
+      },
+      "writtenOn": "2026-04-09T13:03:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e584e35_2bba70b6",
+      "revId": "c862e5c872243984fb4eefd1f22c07516d19c6ff",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
     }
   ]
 }

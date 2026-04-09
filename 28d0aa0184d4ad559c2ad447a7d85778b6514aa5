@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78be8ed3_9557e31a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 7849
+      },
+      "writtenOn": "2026-04-09T13:03:51Z",
+      "side": 1,
+      "message": "And can you please remove the `[SDC]` from the CR title?",
+      "revId": "28d0aa0184d4ad559c2ad447a7d85778b6514aa5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a"
+    }
+  ]
+}
