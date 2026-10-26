@@ -11,19 +11,19 @@ or
 ```
 make build-docker-local
 ```
-##### Helm versions change
-To modify helm versions: 
+##### Helm versions
+The validator uses whatever Helm binaries the image puts on `PATH`:
 
-1. Modify `Dockerfile`, add desired version in line:
-```shell script
-ENV HELM_SUPPORTED_VERSIONS=3.5.2,3.4.1,3.3.4,2.17.0,2.14.3
-```
-2. In local development, edit file: `Makefile` and add desired version in lines:
-```shell script
-build-docker-local:
-	export HELM_SUPPORTED_VERSIONS=3.5.2,3.4.1,3.3.4,2.17.0
-```
-If you want to clean downloaded files run: `make clean-local-files`
+- `helm`: its version is read at startup with `helm version`
+- `helm-v<x.y.z>`: the version is taken from the file name (this is what `make build-docker-local` installs)
+
+`GET /versions` lists exactly those. To narrow the list, set `HELM_SUPPORTED_VERSIONS`
+(comma-separated, e.g. `3.19.0`). Versions named there but not installed are ignored.
+If no usable binary is found, `/actuator/health` reports DOWN.
+
+The production `Dockerfile` installs Alpine's `helm` package, so a rebuild picks up the current Helm 3 release.
+For local images with specific versions, edit `HELM_SUPPORTED_VERSIONS` in the `Makefile` target
+`build-docker-local`. To clean the downloaded files, run `make clean-local-files`.
 
 ##### Run container locally 
 In order to run docker container locally use: 

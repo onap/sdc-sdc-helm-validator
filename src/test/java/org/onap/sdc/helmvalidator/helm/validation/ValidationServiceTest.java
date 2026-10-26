@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,6 +44,7 @@ import org.onap.sdc.helmvalidator.helm.validation.exception.SaveFileException;
 import org.onap.sdc.helmvalidator.helm.validation.model.BashOutput;
 import org.onap.sdc.helmvalidator.helm.validation.model.ValidationResult;
 import org.onap.sdc.helmvalidator.helm.versions.ChartBasedVersionProvider;
+import org.onap.sdc.helmvalidator.helm.versions.InstalledHelmBinaries;
 import org.onap.sdc.helmvalidator.helm.versions.SupportedVersionsProvider;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -77,6 +79,7 @@ class ValidationServiceTest {
     private static final String HELM_LINT = "helm-v3.3.3 lint samplePath";
     private static final String HELM_LINT_STRICT = "helm-v3.3.3 lint samplePath --strict";
     private static final int EXPECTED_ONE = 1;
+    private static final String HELM_COMMAND_NOT_FOUND = "/bin/bash: line 1: helm-v3.3.3: command not found";
 
     private ValidationService validationService;
 
@@ -95,11 +98,17 @@ class ValidationServiceTest {
     @Mock
     private BashExecutor bashExecutor;
 
+    @Mock
+    private InstalledHelmBinaries installedHelmBinaries;
+
     @BeforeEach
     void setUp() {
         when(fileManager.saveFile(multipartFile)).thenReturn(SAMPLE_PATH);
         lenient().when(versionsProvider.getVersions()).thenReturn(SAMPLE_VERSIONS);
-        this.validationService = new ValidationService(fileManager, bashExecutor, versionsProvider, chartBasedProvider);
+        lenient().when(installedHelmBinaries.executableFor(Mockito.anyString()))
+            .thenAnswer(invocation -> Optional.of("helm-v" + invocation.getArgument(0)));
+        this.validationService = new ValidationService(fileManager, bashExecutor, versionsProvider,
+            chartBasedProvider, installedHelmBinaries);
     }
 
     @Test
@@ -294,6 +303,60 @@ class ValidationServiceTest {
             .process(SAMPLE_VERSION, multipartFile, LINTED, STRICT_LINTED);
         assertThat(validationResult.getLintError()).isNotEmpty();
         assertThat(validationResult.getLintError()).hasSize(EXPECTED_ONE);
+    }
+
+    @Test
+    void shouldUseDiscoveredExecutable() {
+        when(installedHelmBinaries.executableFor(SAMPLE_VERSION)).thenReturn(Optional.of("/usr/bin/helm"));
+        mockBashCommand("/usr/bin/helm template samplePath", SUCCESS_HELM_EXIT_CODE, HELM_EMPTY_OUTPUT);
+        mockBashCommand("/usr/bin/helm lint samplePath --strict", SUCCESS_HELM_EXIT_CODE, HELM_EMPTY_OUTPUT);
+
+        ValidationResult validationResult = validationService
+            .process(SAMPLE_VERSION, multipartFile, LINTED, STRICT_LINTED);
+
+        assertThat(validationResult.isDeployable()).isTrue();
+        assertThat(validationResult.isValid()).isTrue();
+    }
+
+    @Test
+    void shouldReturnRawOutputWhenTemplateFailsWithoutStandardError() {
+        mockBashCommand(HELM_TEMPLATE, UNSUCCESSFUL_HELM_EXIT_CODE, HELM_COMMAND_NOT_FOUND);
+
+        ValidationResult validationResult = validationService
+            .process(SAMPLE_VERSION, multipartFile, NOT_LINTED, NOT_STRICT_LINTED);
+
+        assertThat(validationResult.isDeployable()).isFalse();
+        assertThat(validationResult.getRenderErrors()).containsExactly(HELM_COMMAND_NOT_FOUND);
+    }
+
+    @Test
+    void shouldReportExitCodeWhenTemplateFailsWithoutAnyOutput() {
+        when(bashExecutor.execute(HELM_TEMPLATE)).thenReturn(new BashOutput(137, List.of()));
+
+        ValidationResult validationResult = validationService
+            .process(SAMPLE_VERSION, multipartFile, NOT_LINTED, NOT_STRICT_LINTED);
+
+        assertThat(validationResult.isDeployable()).isFalse();
+        assertThat(validationResult.getRenderErrors()).containsExactly("helm template failed with exit code 137");
+    }
+
+    @Test
+    void shouldKeepOnlyStandardErrorsWhenTemplateOutputContainsThem() {
+        mockBashCommand(HELM_TEMPLATE, UNSUCCESSFUL_HELM_EXIT_CODE, "walk.go:74: found symbolic link",
+            HELM_ERROR_ON_TEMPLATE);
+
+        ValidationResult validationResult = validationService
+            .process(SAMPLE_VERSION, multipartFile, NOT_LINTED, NOT_STRICT_LINTED);
+
+        assertThat(validationResult.getRenderErrors()).containsExactly(HELM_ERROR_ON_TEMPLATE);
+    }
+
+    @Test
+    void shouldRejectVersionWithoutExecutable() {
+        when(installedHelmBinaries.executableFor(SAMPLE_VERSION)).thenReturn(Optional.empty());
+
+        assertThatExceptionOfType(NotSupportedVersionException.class)
+            .isThrownBy(() -> validationService.process(SAMPLE_VERSION, multipartFile, NOT_LINTED, NOT_STRICT_LINTED));
     }
 
     private String getLatestSampleHelmVersion(String majorVersion) {

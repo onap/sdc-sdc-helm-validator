@@ -21,8 +21,11 @@
 package org.onap.sdc.helmvalidator.helm.versions;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,42 +34,63 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.onap.sdc.helmvalidator.helm.validation.exception.NotSupportedVersionException;
 
 @ExtendWith(MockitoExtension.class)
 class SupportedVersionsProviderTest {
 
-    private static final List<String> UNSORTED_VERSIONS = List.of("1.0.0", "2.2.1", "2.0.0", "3.0.0");
-    private static final List<String> SORTED_VERSIONS = List.of("3.0.0", "2.2.1", "2.0.0", "1.0.0");
-    private static final List<String> SUPPORTED_VERSIONS = List.of("4.2.0", "3.11.3", "3.1.0", "3.0.4", "2.18.2",
-        "2.1.5", "1.5.6");
+    private static final List<String> INSTALLED = List.of("3.9.0", "2.17.0", "3.14.4", "3.5.2");
 
     private SupportedVersionsProvider versionsProvider;
 
     @Mock
     private SystemEnvVersionsReader versionsReader;
 
+    @Mock
+    private InstalledHelmBinaries installedHelmBinaries;
+
     @BeforeEach
     void setUp() {
-        versionsProvider = new SupportedVersionsProvider(versionsReader);
+        lenient().when(installedHelmBinaries.versions()).thenReturn(new LinkedHashSet<>(INSTALLED));
+        lenient().when(versionsReader.readVersions()).thenReturn(List.of());
+        versionsProvider = new SupportedVersionsProvider(versionsReader, installedHelmBinaries);
     }
 
     @Test
-    void shouldReturnSortedVersionsInRevertOrder() {
+    void allInstalledVersionsAreSupportedWhenNothingIsConfigured() {
+        assertThat(versionsProvider.getVersions()).containsExactly("3.14.4", "3.9.0", "3.5.2", "2.17.0");
+    }
 
-        when(versionsReader.readVersions()).thenReturn(UNSORTED_VERSIONS);
+    @Test
+    void configuredVersionsFilterInstalledOnes() {
+        when(versionsReader.readVersions()).thenReturn(List.of("3.5.2", "2.17.0"));
 
-        List<String> versions = versionsProvider.getVersions();
+        assertThat(versionsProvider.getVersions()).containsExactly("3.5.2", "2.17.0");
+    }
 
-        assertThat(versions).isEqualTo(SORTED_VERSIONS);
+    @Test
+    void configuredButNotInstalledIsNotAdvertised() {
+        when(versionsReader.readVersions()).thenReturn(List.of("3.17.3", "3.5.2"));
+
+        assertThat(versionsProvider.getVersions()).containsExactly("3.5.2");
+    }
+
+    @Test
+    void emptyWhenNothingIsInstalled() {
+        when(installedHelmBinaries.versions()).thenReturn(new LinkedHashSet<>());
+
+        assertThat(versionsProvider.getVersions()).isEmpty();
     }
 
     @ParameterizedTest
-    @CsvSource({"2,2.18.2", "3,3.11.3"})
-    void shouldGetLatestHelmVersionBasedOnDesiredMajorVersion(String desiredMajorVersion, String expectedHelmVersion) {
-        when(versionsProvider.getVersions()).thenReturn(SUPPORTED_VERSIONS);
+    @CsvSource({"2,2.17.0", "3,3.14.4"})
+    void latestIsSemanticNotLexicographic(String major, String expected) {
+        assertThat(versionsProvider.getLatestVersion(major)).isEqualTo(expected);
+    }
 
-        String helmVersion = versionsProvider.getLatestVersion(desiredMajorVersion);
-
-        assertThat(helmVersion).isEqualTo(expectedHelmVersion);
+    @Test
+    void latestThrowsForMajorWithoutInstalledVersion() {
+        assertThatExceptionOfType(NotSupportedVersionException.class)
+            .isThrownBy(() -> versionsProvider.getLatestVersion("4"));
     }
 }

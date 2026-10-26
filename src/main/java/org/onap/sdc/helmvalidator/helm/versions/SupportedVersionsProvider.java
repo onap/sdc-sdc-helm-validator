@@ -20,9 +20,7 @@
 
 package org.onap.sdc.helmvalidator.helm.versions;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import org.onap.sdc.helmvalidator.helm.validation.exception.NotSupportedVersionException;
 import org.springframework.stereotype.Service;
@@ -31,20 +29,25 @@ import org.springframework.stereotype.Service;
 public class SupportedVersionsProvider {
 
     private final SystemEnvVersionsReader versionsReader;
+    private final InstalledHelmBinaries installedHelmBinaries;
 
-    public SupportedVersionsProvider(SystemEnvVersionsReader versionsReader) {
+    public SupportedVersionsProvider(SystemEnvVersionsReader versionsReader,
+        InstalledHelmBinaries installedHelmBinaries) {
         this.versionsReader = versionsReader;
+        this.installedHelmBinaries = installedHelmBinaries;
     }
 
     /**
-     * Retrieves list of available Helm client versions.
+     * Retrieves list of available Helm client versions: every installed one, narrowed to
+     * HELM_SUPPORTED_VERSIONS when that variable is set.
      *
-     * @return list of available Helm client versions
+     * @return list of available Helm client versions, latest first
      */
     public List<String> getVersions() {
-        return versionsReader.readVersions().stream()
-            .filter(Predicate.not(String::isBlank))
-            .sorted(Comparator.reverseOrder())
+        List<String> configured = versionsReader.readVersions();
+        return installedHelmBinaries.versions().stream()
+            .filter(version -> configured.isEmpty() || configured.contains(version))
+            .sorted(SemanticVersionComparator.INSTANCE.reversed())
             .collect(Collectors.toList());
     }
 

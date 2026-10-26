@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+
+- SDC-5195 Use the Helm binaries installed in the image instead of requiring `helm-v<version>` and
+  `HELM_SUPPORTED_VERSIONS`; versions are ordered semantically; `/actuator/health` is DOWN without
+  a usable Helm; a failed `helm template` without an `Error:` line now returns its output.
+
 ## [1.3.2] - 25/05/2024
 
 ### Added

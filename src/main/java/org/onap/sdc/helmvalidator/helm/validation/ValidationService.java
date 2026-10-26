@@ -32,6 +32,7 @@ import org.onap.sdc.helmvalidator.helm.validation.model.LintValidationResult;
 import org.onap.sdc.helmvalidator.helm.validation.model.TemplateValidationResult;
 import org.onap.sdc.helmvalidator.helm.validation.model.ValidationResult;
 import org.onap.sdc.helmvalidator.helm.versions.ChartBasedVersionProvider;
+import org.onap.sdc.helmvalidator.helm.versions.InstalledHelmBinaries;
 import org.onap.sdc.helmvalidator.helm.versions.SupportedVersionsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +59,8 @@ public class ValidationService {
     private final ChartBasedVersionProvider chartBasedVersionProvider;
 
 
+    private final InstalledHelmBinaries installedHelmBinaries;
+
     /**
      * Constructor for ValidationService.
      *
@@ -65,15 +68,18 @@ public class ValidationService {
      * @param executor                  object responsible for running shell commands
      * @param supportedVersionsProvider object providing supported versions of Helm
      * @param chartBasedVersionProvider object allowing to derive Helm version from a chart
+     * @param installedHelmBinaries     object resolving a Helm version to its executable
      */
     public ValidationService(
         FileManager fileManager, BashExecutor executor,
         SupportedVersionsProvider supportedVersionsProvider,
-        ChartBasedVersionProvider chartBasedVersionProvider) {
+        ChartBasedVersionProvider chartBasedVersionProvider,
+        InstalledHelmBinaries installedHelmBinaries) {
         this.fileManager = fileManager;
         this.executor = executor;
         this.supportedVersionsProvider = supportedVersionsProvider;
         this.chartBasedVersionProvider = chartBasedVersionProvider;
+        this.installedHelmBinaries = installedHelmBinaries;
     }
 
     /**
@@ -142,8 +148,13 @@ public class ValidationService {
     }
 
 
+    private String helmExecutable(String version) {
+        return installedHelmBinaries.executableFor(version)
+            .orElseThrow(() -> new NotSupportedVersionException(version));
+    }
+
     private String buildHelmTemplateCommand(String version, String chartPath) {
-        return "helm-v" + version + " " + TEMPLATE_OPTION + " " + chartPath;
+        return helmExecutable(version) + " " + TEMPLATE_OPTION + " " + chartPath;
     }
 
     private TemplateValidationResult runHelmTemplate(String helmCommand)
@@ -154,13 +165,23 @@ public class ValidationService {
         LOGGER.debug("Status code: {}", chartTemplateResult.getExitValue());
         if (chartTemplateResult.getExitValue() != 0) {
             List<String> renderingErrors = parseTemplateError(chartTemplateResult.getOutputLines());
+            if (renderingErrors.isEmpty()) {
+                renderingErrors = nonStandardTemplateFailure(chartTemplateResult);
+            }
             return new TemplateValidationResult(false, renderingErrors);
         }
         return new TemplateValidationResult(true, Collections.emptyList());
     }
 
+    private List<String> nonStandardTemplateFailure(BashOutput output) {
+        if (output.getOutputLines().isEmpty()) {
+            return List.of("helm template failed with exit code " + output.getExitValue());
+        }
+        return output.getOutputLines();
+    }
+
     private String buildHelmLintCommand(String version, String chartPath, boolean isStrictLint) {
-        String command = "helm-v" + version + " " + LINT_OPTION + " " + chartPath;
+        String command = helmExecutable(version) + " " + LINT_OPTION + " " + chartPath;
         if (isStrictLint) {
             return command + " --strict";
         }
