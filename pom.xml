@@ -27,6 +27,7 @@
     <apache.commons.codec.version>1.18.0</apache.commons.codec.version>
     <apache.commons.lang3.version>3.17.0</apache.commons.lang3.version>
     <tomcat-embed.version>9.0.99</tomcat-embed.version>
+    <snakeyaml.version>2.2</snakeyaml.version>
 
     <docker.dockerfile>Dockerfile</docker.dockerfile>
     <docker-image.name>onap/${project.artifactId}</docker-image.name>
@@ -161,6 +162,12 @@
         <groupId>org.apache.tomcat.embed</groupId>
         <artifactId>tomcat-embed-el</artifactId>
         <version>${tomcat-embed.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>${snakeyaml.version}</version>
       </dependency>
 
     </dependencies>
