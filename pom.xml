@@ -52,11 +52,51 @@
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-sleuth</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.security</groupId>
+          <artifactId>spring-security-rsa</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.zipkin.brave</groupId>
+          <artifactId>brave-instrumentation-spring-rabbit</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.zipkin.brave</groupId>
+          <artifactId>brave-instrumentation-kafka-clients</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.zipkin.brave</groupId>
+          <artifactId>brave-instrumentation-kafka-streams</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.zipkin.brave</groupId>
+          <artifactId>brave-instrumentation-jms</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.zipkin.brave</groupId>
+          <artifactId>brave-instrumentation-mongodb</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>io.zipkin.reporter2</groupId>
+          <artifactId>zipkin-sender-kafka</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.zipkin.reporter2</groupId>
+          <artifactId>zipkin-sender-activemq-client</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>io.zipkin.reporter2</groupId>
+          <artifactId>zipkin-sender-amqp-client</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
